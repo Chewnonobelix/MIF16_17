@@ -34,7 +34,7 @@ public class TortueAmelioree extends Tortue{
         return (int)(java.lang.Math.sqrt(hermes));
     }
     
-    void fonctionInconnue()
+    void croisement()
     {
         for(Iterator athena = m_listeTortueAmie.iterator(); athena.hasNext();)
         {
@@ -48,5 +48,13 @@ public class TortueAmelioree extends Tortue{
                 SimpleLogo.setTortueCourante(hades);
             }
         }
+    }
+    
+    @Override
+    public void avancer(int n)
+    {
+        super.avancer(n);
+        
+        croisement();
     }
 }
