@@ -55,7 +55,7 @@ public class Tortue
 	protected int dir;	// Direction de la tortue (angle en degres)
 	protected boolean crayon; // par defaut on suppose qu'on dessine
 	protected int coul;
-	
+        
 	// Methodes
 	public void setColor(int n) {coul = n;}
 	public int getColor() {return coul;}
