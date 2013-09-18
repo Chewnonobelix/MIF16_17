@@ -123,10 +123,15 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		p2.add(b22);
 		b22.addActionListener(this);
                 
+                JButton b23 = new JButton("Proc4");
+		p2.add(b23);
+		b23.addActionListener(this);
+
                 JButton hera = new JButton("Proc5");
 		p2.add(hera);
 		hera.addActionListener(this);
                 
+
 		getContentPane().add(p2,"South");
 
 		feuille = new FeuilleDessin(); //500, 400);
@@ -200,6 +205,8 @@ public class SimpleLogo extends JFrame implements ActionListener {
                 {
                     proc5();
                 }
+                else if (c.equals("Proc4"))
+			proc4();
 		else if (c.equals("Effacer"))
 			effacer();
 		else if (c.equals("Quitter"))
@@ -219,6 +226,10 @@ public class SimpleLogo extends JFrame implements ActionListener {
 
 	public void proc3() {
 		courante.spiral(50,40,6);
+	}
+        
+        public void proc4() {
+		courante.maison();
 	}
 
         public void proc5()

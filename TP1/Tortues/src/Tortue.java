@@ -200,6 +200,18 @@ public class Tortue
 			droite(90);
 		}
 	}
+        
+        public void rectangle(int longueur, int largeur) {
+		
+                avancer(longueur);
+                droite(90);
+                avancer(largeur);
+                droite(90);
+                avancer(longueur);
+                droite(90);
+                avancer(largeur);
+                droite(90);
+	}
 
 	public void poly(int n, int a) //n largeur des coté, a nombre de sommet 
         {
@@ -218,15 +230,35 @@ public class Tortue
 		}
 	}
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        public void maison() {
+		
+                // Murs
+                carre();
+                
+                //Toit
+                avancer(100);
+                droite(30);
+                poly(100,3);
+                
+                //Fenêtre
+                leverCrayon();
+                droite(60);
+                avancer(40);
+                droite(90);
+                avancer(20);
+                baisserCrayon();
+                poly(30,4);
+                
+                //Porte
+                leverCrayon();
+                avancer(80);
+                gauche(90);
+                avancer(20);
+                gauche(90);
+                baisserCrayon();
+                rectangle(50,30);
+                
+	}
         
         public void etoile(int nbBranche, int taille)
         {
@@ -242,3 +274,4 @@ public class Tortue
             }
         }
 }
+        
