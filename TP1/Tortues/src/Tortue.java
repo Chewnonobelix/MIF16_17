@@ -201,7 +201,8 @@ public class Tortue
 		}
 	}
 
-	public void poly(int n, int a) {
+	public void poly(int n, int a) //n largeur des coté, a nombre de sommet 
+        {
 		for (int j=0;j<a;j++) {
 			avancer(n);
 			droite(360/a);
@@ -216,4 +217,28 @@ public class Tortue
 			n = n+1;
 		}
 	}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        public void etoile(int nbBranche, int taille)
+        {
+            int artemis = 360/nbBranche; //Angle des branches
+            dir = 0;
+            for(int zeus = 0; zeus < nbBranche; zeus ++)
+            {
+                avancer(taille);
+                leverCrayon();
+                avancer(-taille);
+                baisserCrayon();
+                dir += artemis;
+            }
+        }
 }
