@@ -28,7 +28,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	public static final Dimension HGAP = new Dimension(5,1);
 
 	private FeuilleDessin feuille;
-	private Tortue courante;
+	static private Tortue courante;
 	private JTextField inputValue;
 
 	// la procedure principale
@@ -46,6 +46,10 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		logoInit();
 	}
 
+        static void setTortueCourante(Tortue t)
+        {
+            courante = t;
+        }
 	public void logoInit() {
 		getContentPane().setLayout(new BorderLayout(10,10));
 
