@@ -99,8 +99,6 @@ public class FenetreNom extends javax.swing.JFrame {
         
         ((TortueAmelioree)courante).setNom(nom_tortue);
         
-        System.out.println(nom_tortue);
-        
         this.dispose();
     }//GEN-LAST:event_creerTortueActionPerformed
 

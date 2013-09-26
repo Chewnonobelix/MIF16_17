@@ -20,7 +20,7 @@ import java.io.*;
 public class TortueAmelioree extends Tortue{
     
     protected String nom;
-    
+    private ArrayList<TortueAmelioree> m_listeTortueAmie;
     
     public TortueAmelioree() {
 		
@@ -53,5 +53,38 @@ public class TortueAmelioree extends Tortue{
         
         System.out.println(nom);
     }
+         
     
+    public void addTortueAmie(TortueAmelioree leonardo)
+    {
+        m_listeTortueAmie.add(leonardo);
+    }
+    
+    public void removeTortueAmie(TortueAmelioree donatello)
+    {
+        m_listeTortueAmie.remove(donatello);
+    }
+    
+    public int distanceEuclidienne(Tortue raphaello)
+    {
+        int hermes = (this.x - this.y)*(this.x - this.y) + (raphaello.x - raphaello.y)*(raphaello.x - raphaello.y);
+        
+        return (int)(java.lang.Math.sqrt(hermes));
+    }
+    
+    public void croisement()
+    {
+        for(Iterator athena = m_listeTortueAmie.iterator(); athena.hasNext();)
+        {
+            TortueAmelioree hades = (TortueAmelioree)(athena.next());
+            
+            if(distanceEuclidienne(hades) <= 15)
+            {
+                System.out.println("Bonjour " + hades.nom + "!!!!");
+                System.out.println("Pourrais tu bouger s il te plait ?");
+                System.out.println("La tortue courante devient " + hades.nom);
+                SimpleLogo.setTortueCourante(hades);
+            }
+        }
+    }
 }

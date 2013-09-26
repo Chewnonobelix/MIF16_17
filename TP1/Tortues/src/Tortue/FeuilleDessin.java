@@ -24,6 +24,14 @@ public class FeuilleDessin extends JPanel {
 		tortues = new ArrayList<Tortue>();
 	}
 
+    
+        public ArrayList<Tortue> getTortues() {
+            return tortues;
+   
+        }
+
+        
+        
 	public void addTortue(Tortue o) {
 		tortues.add(o);
 	}
