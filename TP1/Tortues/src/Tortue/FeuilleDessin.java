@@ -58,8 +58,10 @@ public class FeuilleDessin extends JPanel {
 	
 	public void showTurtles(Graphics g) {
 		for(Iterator it = tortues.iterator();it.hasNext();) {
-			Tortue t = (Tortue) it.next();
+			TortueAmelioree t = (TortueAmelioree) it.next();
 			t.drawTurtle(g);
+                        g.setColor(Color.BLACK);
+                        g.drawString(t.getNom(),t.getX(),t.getY());
 		}
 	}
 }
