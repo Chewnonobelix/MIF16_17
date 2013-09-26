@@ -1,5 +1,7 @@
+package Tortue;
 
-// package logo;
+
+//package logo;
 
 import java.awt.*;
 import javax.swing.*;
@@ -55,7 +57,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		buttonPanel.add(toolBar);
 
 		getContentPane().add(buttonPanel,"North");
-
+                addButton(toolBar, "Creer", "Creer une tortue", null);
 		addButton(toolBar,"Effacer","Nouveau dessin","/icons/New24.gif");
 
 		toolBar.add(Box.createRigidArea(HGAP));
@@ -66,6 +68,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		addButton(toolBar, "Gauche", "Gauche 45", null);
 		addButton(toolBar, "Lever", "Lever Crayon", null);
 		addButton(toolBar, "Baisser", "Baisser Crayon", null);
+                addButton(toolBar, "Nom", "Afficher Nom Tortue", null);
 
 		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
 								 "vert", "gris clair", "magenta", "orange",
@@ -122,11 +125,9 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		JButton b22 = new JButton("Proc3");
 		p2.add(b22);
 		b22.addActionListener(this);
-                
                 JButton b23 = new JButton("Proc4");
 		p2.add(b23);
 		b23.addActionListener(this);
-
                 JButton hera = new JButton("Proc5");
 		p2.add(hera);
 		hera.addActionListener(this);
@@ -141,18 +142,28 @@ public class SimpleLogo extends JFrame implements ActionListener {
 			
 		getContentPane().add(feuille,"Center");
 		
-		// Creation de la tortue
-		Tortue tortue = new Tortue();
 		
-		// Deplacement de la tortue au centre de la feuille
-		tortue.setPosition(500/2, 400/2); 		
-		
-		courante = tortue;
-		feuille.addTortue(tortue);
 
 		pack();
 		setVisible(true);
 	}
+        
+        public void creerTortueBouton(){
+            
+            courante = new TortueAmelioree("");
+            
+            feuille.addTortue(courante);
+            
+            courante.setPosition(500/2, 400/2);
+            
+            FenetreNom fenetre = new FenetreNom(courante);
+            
+            fenetre.setVisible(true);
+            
+            
+            
+            
+        }
 
 	public String getInputValue(){
 		String s = inputValue.getText();
@@ -163,54 +174,66 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e)
 	{
 		String c = e.getActionCommand();
-
-		// actions des boutons du haut
-		if (c.equals("Avancer")) {
-			try {
-				int v = Integer.parseInt(inputValue.getText());
-				courante.avancer(v);
-			} catch (NumberFormatException ex){
-				System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-			}
-			
-		}
-		else if (c.equals("Droite")) {
-			try {
-				int v = Integer.parseInt(inputValue.getText());
-				courante.droite(v);
-			} catch (NumberFormatException ex){
-				System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-			}
-		}
-		else if (c.equals("Gauche")) {
-			try {
-				int v = Integer.parseInt(inputValue.getText());
-				courante.gauche(v);
-			} catch (NumberFormatException ex){
-				System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-			}
-		}
-		else if (c.equals("Lever")) 
-			courante.leverCrayon();
-		else if (c.equals("Baisser"))
-			courante.baisserCrayon();
-		// actions des boutons du bas
-		else if (c.equals("Proc1"))
-			proc1();
-		else if (c.equals("Proc2"))
-			proc2();
-		else if (c.equals("Proc3"))
-			proc3();
-                else if(c.equals("Proc5"))
-                {
-                    proc5();
+        // actions des boutons du haut
+        switch (c) {
+            case "Avancer":
+                try {
+                        int v = Integer.parseInt(inputValue.getText());
+                        courante.avancer(v);
+                } catch (NumberFormatException ex){
+                        System.err.println("ce n'est pas un nombre : " + inputValue.getText());
                 }
-                else if (c.equals("Proc4"))
-			proc4();
-		else if (c.equals("Effacer"))
-			effacer();
-		else if (c.equals("Quitter"))
-			quitter();
+                break;
+            case "Droite":
+                try {
+                        int v = Integer.parseInt(inputValue.getText());
+                        courante.droite(v);
+                } catch (NumberFormatException ex){
+                        System.err.println("ce n'est pas un nombre : " + inputValue.getText());
+                }
+                break;
+            case "Gauche":
+                try {
+                        int v = Integer.parseInt(inputValue.getText());
+                        courante.gauche(v);
+                } catch (NumberFormatException ex){
+                        System.err.println("ce n'est pas un nombre : " + inputValue.getText());
+                }
+                break;
+            case "Lever":
+                courante.leverCrayon();
+                break;
+            case "Baisser":
+                courante.baisserCrayon();
+                break;
+            case "Nom":
+                ((TortueAmelioree)courante).afficherNom();
+                break;
+            case "Creer":
+                creerTortueBouton();
+                break;
+            case "Proc1":
+                proc1();
+                break;
+            case "Proc2":
+                proc2();
+                break;
+            case "Proc3":
+                proc3();
+                break;
+            case "Proc4":
+                proc4();
+                break;
+            case "Proc5":
+                proc5();
+                break;
+            case "Effacer":
+                effacer();
+                break;
+            case "Quitter":
+                quitter();
+                break;
+        }
 
 		feuille.repaint();
 	}
