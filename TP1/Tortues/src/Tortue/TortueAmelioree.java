@@ -67,7 +67,7 @@ public class TortueAmelioree extends Tortue{
     
     public int distanceEuclidienne(Tortue raphaello)
     {
-        int hermes = (this.x - this.y)*(this.x - this.y) + (raphaello.x - raphaello.y)*(raphaello.x - raphaello.y);
+        int hermes = (this.x - raphaello.x)*(this.x - raphaello.x) + (this.y - raphaello.y)*(this.y - raphaello.y);
         
         return (int)(java.lang.Math.sqrt(hermes));
     }
