@@ -20,7 +20,7 @@ import java.io.*;
 public class TortueAmelioree extends Tortue{
     
     protected String nom;
-    private ArrayList<TortueAmelioree> m_listeTortueAmie;
+    private ArrayList<Tortue> m_listeTortueAmie;
     
     public TortueAmelioree() {
 		
@@ -48,6 +48,14 @@ public class TortueAmelioree extends Tortue{
         this.nom = nom;
     }
 
+    public ArrayList<Tortue> getM_listeTortueAmie() {
+        return m_listeTortueAmie;
+    }
+
+    public void setM_listeTortueAmie(ArrayList<Tortue> m_listeTortueAmie) {
+        this.m_listeTortueAmie = m_listeTortueAmie;
+    }
+
     
     public void afficherNom(){
         
@@ -55,14 +63,22 @@ public class TortueAmelioree extends Tortue{
     }
          
     
-    public void addTortueAmie(TortueAmelioree leonardo)
+    public void addTortueAmie(Tortue leonardo)
     {
-        m_listeTortueAmie.add(leonardo);
+        if(leonardo != this){
+            m_listeTortueAmie.add(leonardo);
+        }
+        
     }
     
-    public void removeTortueAmie(TortueAmelioree donatello)
+    public void removeTortueAmie(Tortue donatello)
     {
         m_listeTortueAmie.remove(donatello);
+    }
+    
+    public void removeTortueAmieI(int i)
+    {
+        m_listeTortueAmie.remove(i);
     }
     
     public int distanceEuclidienne(Tortue raphaello)
@@ -82,9 +98,27 @@ public class TortueAmelioree extends Tortue{
             {
                 System.out.println("Bonjour " + hades.nom + "!!!!");
                 System.out.println("Pourrais tu bouger s il te plait ?");
-                System.out.println("La tortue courante devient " + hades.nom);
-                SimpleLogo.setTortueCourante(hades);
+                hades.deplacement(15);
             }
         }
+    }
+    
+
+    public void deplacement(int n){
+	try {
+		Random rand = new Random();
+		this.droite(rand.nextInt(90)-45);
+		this.avancer(n);
+			
+		if(this.x + n <= 15 || this.x + n >= SimpleLogo.feuille.getWidth()-0 || 
+                        this.y + n >= SimpleLogo.feuille.getHeight()-0 || this.y + n <= 15){
+			this.droite(180);
+			this.avancer(15);
+        }
+			
+	} catch (NumberFormatException ex){
+		System.err.println("ce n'est pas un nombre : " + n);
+	}
+	
     }
 }

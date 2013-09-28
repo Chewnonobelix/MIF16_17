@@ -30,6 +30,10 @@ public class FeuilleDessin extends JPanel {
    
         }
 
+        public Tortue getTortue(int n) {
+            return tortues.get(n);
+   
+        }
         
         
 	public void addTortue(Tortue o) {

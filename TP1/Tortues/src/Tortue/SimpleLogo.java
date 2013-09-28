@@ -5,7 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
-import java.io.*;
+import java.util.Timer;
 
 /**
  * ***********************************************************************
@@ -26,9 +26,10 @@ public class SimpleLogo extends JFrame implements ActionListener {
 
     public static final Dimension VGAP = new Dimension(1, 5);
     public static final Dimension HGAP = new Dimension(5, 1);
-    private FeuilleDessin feuille;
+    static public FeuilleDessin feuille;
     static private Tortue courante;
     private JTextField inputValue;
+    private Timer timer;
 
     // la procedure principale
     public static void main(String[] args) {
@@ -49,6 +50,34 @@ public class SimpleLogo extends JFrame implements ActionListener {
         courante = t;
     }
 
+    public FeuilleDessin getFeuille() {
+        return feuille;
+    }
+
+    public void setFeuille(FeuilleDessin feuille) {
+        this.feuille = feuille;
+    }
+    
+    public void majDesListes(){
+	
+        for(int i = 0 ; i < feuille.getTortues().size(); i++){
+            
+            ArrayList<Tortue> listeTortuesAmie = new ArrayList(feuille.getTortues());
+            ((TortueAmelioree)feuille.getTortue(i)).setM_listeTortueAmie(listeTortuesAmie);
+            ((TortueAmelioree)feuille.getTortue(i)).removeTortueAmieI(i);
+        }            
+    }
+    
+     public void majDesListesBalle(){
+	
+        for(int i = 0 ; i < feuille.getTortues().size(); i++){
+            
+            ArrayList<Tortue> listeTortuesAmie = new ArrayList(feuille.getTortues());
+            ((TortueBalle)feuille.getTortue(i)).setM_listeTortueAmie(listeTortuesAmie);
+            ((TortueBalle)feuille.getTortue(i)).removeTortueAmieI(i);
+        }            
+    }
+    
     public void logoInit() {
         getContentPane().setLayout(new BorderLayout(10, 10));
 
@@ -129,9 +158,15 @@ public class SimpleLogo extends JFrame implements ActionListener {
         JButton b23 = new JButton("Proc4");
         p2.add(b23);
         b23.addActionListener(this);
-        JButton hera = new JButton("Proc5");
-        p2.add(hera);
-        hera.addActionListener(this);
+        JButton b24 = new JButton("Proc5");
+        p2.add(b24);
+        b24.addActionListener(this);
+        JButton b25 = new JButton("Proc6");
+        p2.add(b25);
+        b25.addActionListener(this);
+        JButton b26 = new JButton("Proc7");
+        p2.add(b26);
+        b26.addActionListener(this);
 
 
         getContentPane().add(p2, "South");
@@ -256,6 +291,12 @@ public class SimpleLogo extends JFrame implements ActionListener {
             case "Proc5":
                 proc5();
                 break;
+            case "Proc6":
+                proc6();
+                break;
+            case "Proc7":
+                proc7();
+                break;
             case "Effacer":
                 effacer();
                 break;
@@ -289,11 +330,79 @@ public class SimpleLogo extends JFrame implements ActionListener {
     public void proc5() {
         courante.etoile(8, 100);
     }
+    
+    public void proc6() {
+		                
+        for(int i = 0; i < 15; i++){
+            
+            courante = new TortueAmelioree("tortue"+i);
+            feuille.addTortue(courante);
+            
+            courante.setPosition(500 / 2, 400 / 2);
+        }
+                
+        majDesListes();
+        
+        timer = new Timer();
+	timer.schedule (new TimerTask() {
+            public void run()
+            {
+                TortueAmelioree temp = null;
+                
+            	for(int i = 0; i < 15; i++){
+            
+                    temp = (TortueAmelioree)feuille.getTortues().get(i);
+                    temp.deplacement(20);
+                    temp.croisement();
+                    feuille.repaint();
+                
+                }
+            }
+        }, 0, 500);
+    }
+    
+    public void proc7() {
+		                
+        for(int i = 0; i < 15; i++){
+            
+            courante = new TortueBalle("tortue"+i);
+            feuille.addTortue(courante);
+            
+            courante.setPosition(500 / 2, 400 / 2);
+        }
+                
+        majDesListesBalle();
+        
+        /*JeuDeBalle jeu = new JeuDeBalle(feuille,feuille.getTortues());
+        timer = new Timer();
+        jeu.lancePartie(timer);*/
+        
+        timer = new Timer();
+	timer.schedule (new TimerTask() {
+            public void run()
+            {
+                TortueBalle temp = null;
+                
+            	for(int i = 0; i < 15; i++){
+            
+                    temp = (TortueBalle)feuille.getTortues().get(i);
+                    temp.deplacement(20);
+                    temp.croisement();
+                    feuille.repaint();
+                
+                }
+            }
+        }, 0, 500);
+	
+    }
+    
     // efface tout et reinitialise la feuille
 
     public void effacer() {
+        timer.cancel();
         feuille.reset();
         feuille.repaint();
+        
 
         // Replace la tortue au centre
         Dimension size = feuille.getSize();
