@@ -35,6 +35,12 @@ public class FeuilleDessin extends JPanel {
    
         }
         
+        public void removeTortue(Tortue tortue) {
+            tortues.remove(tortue);
+   
+        }
+
+        
         
 	public void addTortue(Tortue o) {
 		tortues.add(o);
@@ -68,4 +74,5 @@ public class FeuilleDessin extends JPanel {
                         g.drawString(t.getNom(),t.getX(),t.getY());
 		}
 	}
+        
 }

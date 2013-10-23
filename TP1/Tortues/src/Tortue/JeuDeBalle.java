@@ -1,11 +1,11 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package Tortue;
 
-import static Tortue.SimpleLogo.feuille;
-import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,11 +17,9 @@ public class JeuDeBalle {
     
     private FeuilleDessin feuille;
     
-    private ArrayList<Tortue> joueurs;
 
-    public JeuDeBalle(FeuilleDessin feuille, ArrayList<Tortue> joueurs) {
+    public JeuDeBalle(FeuilleDessin feuille) {
         this.feuille = feuille;
-        this.joueurs = joueurs;
     }
 
     public FeuilleDessin getFeuille() {
@@ -31,30 +29,65 @@ public class JeuDeBalle {
     public void setFeuille(FeuilleDessin feuille) {
         this.feuille = feuille;
     }
-
-    public ArrayList<Tortue> getJoueurs() {
-        return joueurs;
-    }
-
-    public void setJoueurs(ArrayList<Tortue> joueurs) {
-        this.joueurs = joueurs;
-    }
     
     public void lancePartie(Timer timer){
+           
+        TortueBalle temp = null;
+        
+        for(int i = 0; i < 20; i++){
+            
+            TortueBalle tortue = new TortueBalle("tortue"+i);
+            feuille.addTortue(tortue);
+            
+            tortue.setPosition(500 / 2, 400 / 2);
+            tortue.leverCrayon();
+        }
+        
+        
+        Random rand = new Random();
+        int nombreAleatoire = rand.nextInt(20 - 0 + 1) + 0;
+        
+        ((TortueBalle)feuille.getTortue(nombreAleatoire)).setBalle(true);          
+            
+        timer = new Timer();      
         
 	timer.schedule (new TimerTask() {
             public void run()
             {
-                TortueAmelioree temp = null;
+                TortueBalle temp = null;
+                TortueBalle temp2 = null;
                 
-            	for(int i = 0; i < 15; i++){
+            	for(int i = 0; i < feuille.getTortues().size(); i++){
             
-                    temp = (TortueAmelioree)feuille.getTortues().get(i);
-                    temp.deplacement(20);
-                    temp.croisement();
+                    temp = (TortueBalle)feuille.getTortues().get(i);
+                    temp.deplacement(20);                 
                     feuille.repaint();
                 
                 }
+                for(int i = 0; i < feuille.getTortues().size(); i++){
+                    
+                    temp = (TortueBalle)feuille.getTortues().get(i);
+                    
+                    if(temp.isBalle()){
+                        
+                        for(int j = 0; j < feuille.getTortues().size(); j++){
+                            
+                            temp2 = (TortueBalle)feuille.getTortues().get(j);
+                            
+                            if(temp != temp2 && temp.distanceEuclidienne(temp2) <= 15){
+                                                              
+                                temp.setBalle(false);
+                                temp2.setBalle(true);
+                                temp2.deplacement(30);
+                                break;                            
+                                
+                            }
+                        }
+                        
+                    }
+                }
+                feuille.repaint();
+                
             }
         }, 0, 500);
     }
