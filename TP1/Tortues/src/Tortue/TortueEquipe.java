@@ -1,7 +1,8 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Tortue;
-
-
-
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,46 +10,24 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.Iterator;
 
-
 /**
- * Classe qui h�rite de la classe TortueAmelioree.
- * Elle est dessin�e sous forme de disque. Elle connait la tortue (TortueAmelioree ou TortueEquipe) qui la poss�de. 
+ *
+ * @author bjidée
  */
-public class TortueBalle extends TortueAmelioree{
+public class TortueEquipe extends TortueBalle {
 
-	protected boolean balle;
-
-	// tortue qui me possède (la balle)
-
-
-	
-    public TortueBalle(String nom) {
-	
-        super();
-
-        if(nom == "null"){
-            this.nom = "Donatello";
-        }
-        else{
-            this.nom = nom;
-        }
-        balle = false;
+    private EquipeTortue equipe;
+    private Color color;
+    
+    public TortueEquipe(String nom, EquipeTortue equipe, Color color) {
+        super(nom);
+        this.equipe = equipe;
+        this.color = color;
     }
-
-    public boolean isBalle() {
-        return balle;
-    }
-
-    public void setBalle(boolean balle) {
-        this.balle = balle;
-    }
-   
-
-    // On redéfinit la méthode drawTurtle pour que ce soit un disque s'il a la balle
-	
+    
     public void drawTurtle (Graphics graph) {
-	
-        if(balle){
+		
+        if(this.balle){
             double r = Math.sqrt( rp*rp + rb*rb );
             double theta = ratioDegRad * (-this.dir);
 		
@@ -56,7 +35,7 @@ public class TortueBalle extends TortueAmelioree{
 		
             Point p2 = new Point((int) Math.round(p.x+r*Math.cos(theta)),(int) Math.round(p.y-r*Math.sin(theta)));
 	
-            graph.setColor(Color.red);
+            graph.setColor(color);
             graph.fillOval(p2.x-5, p2.y-5, 10, 10);
         }
         else{
@@ -95,12 +74,22 @@ public class TortueBalle extends TortueAmelioree{
 		  (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
 
 		arrow.addPoint(p2.x,p2.y);
-		graph.setColor(Color.green);
+		graph.setColor(color);
 		graph.fillPolygon(arrow);
         }
-        
-	
+                
+                
+    }
+
+    public EquipeTortue getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(EquipeTortue equipe) {
+        this.equipe = equipe;
     }
     
-	
+    
+    
+    
 }

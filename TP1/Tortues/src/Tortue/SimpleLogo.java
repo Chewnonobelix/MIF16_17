@@ -77,6 +77,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
             ((TortueBalle)feuille.getTortue(i)).removeTortueAmieI(i);
         }            
     }
+
     
     public void logoInit() {
         getContentPane().setLayout(new BorderLayout(10, 10));
@@ -167,6 +168,9 @@ public class SimpleLogo extends JFrame implements ActionListener {
         JButton b26 = new JButton("Proc7");
         p2.add(b26);
         b26.addActionListener(this);
+        JButton b27 = new JButton("Proc8");
+        p2.add(b27);
+        b27.addActionListener(this);
 
 
         getContentPane().add(p2, "South");
@@ -297,6 +301,11 @@ public class SimpleLogo extends JFrame implements ActionListener {
             case "Proc7":
                 proc7();
                 break;
+
+            case "Proc8":
+                proc8();
+                break;
+
             case "Effacer":
                 effacer();
                 break;
@@ -334,11 +343,12 @@ public class SimpleLogo extends JFrame implements ActionListener {
     public void proc6() {
 		                
         for(int i = 0; i < 15; i++){
+
+            TortueAmelioree tortue = new TortueAmelioree("tortue"+i);
+            feuille.addTortue(tortue);
             
-            courante = new TortueAmelioree("tortue"+i);
-            feuille.addTortue(courante);
-            
-            courante.setPosition(500 / 2, 400 / 2);
+            tortue.setPosition(500 / 2, 400 / 2);
+
         }
                 
         majDesListes();
@@ -362,6 +372,18 @@ public class SimpleLogo extends JFrame implements ActionListener {
     }
     
     public void proc7() {
+
+		 
+        JeuDeBalle jeu = new JeuDeBalle(feuille);
+        jeu.lancePartie(timer);
+	
+    }
+    
+    public void proc8() {
+		 
+        JeuEquipe jeu = new JeuEquipe(feuille);
+        jeu.lancePartie(timer);
+
 		                
         for(int i = 0; i < 15; i++){
             
@@ -399,6 +421,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
     // efface tout et reinitialise la feuille
 
     public void effacer() {
+
         timer.cancel();
         feuille.reset();
         feuille.repaint();
