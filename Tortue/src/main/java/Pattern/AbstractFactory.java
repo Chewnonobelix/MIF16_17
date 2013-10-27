@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tortue.Controleur;
+package Pattern;
 
-import Pattern.AbstractFactory;
 /**
  *
  * @author Arnaud
  */
-public class ControlerMain 
-{
-    
+
+public abstract class AbstractFactory <T>
+{   
+    abstract T create();
 }

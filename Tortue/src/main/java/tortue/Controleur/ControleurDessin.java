@@ -8,6 +8,6 @@ package tortue.Controleur;
  *
  * @author Arnaud
  */
-public class ControleurDessin {
-    
+public class ControleurDessin extends AbstractControleur
+{
 }

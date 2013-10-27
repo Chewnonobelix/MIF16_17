@@ -10,5 +10,7 @@ package tortue.Controleur;
  */
 public abstract class AbstractControleur extends Object
 {
-    
-}
+    public AbstractControleur()
+    {
+    }
+    }
