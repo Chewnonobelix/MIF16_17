@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import tortue.Controleur.Dessin.FeuilleDessin;
 import tortue.Model.Dessin.ConcreteTortue;
 
 /**
@@ -43,7 +44,7 @@ public class MainFrame extends JFrame implements ActionListener
     ConcreteTortue m_courante;
     public static final Dimension VGAP = new Dimension(1, 5);
     public static final Dimension HGAP = new Dimension(5, 1);
-    //static public FeuilleDessin feuille;
+    static public FeuilleDessin feuille;
     private JTextField inputValue;
     private Timer timer;/**
      * 
@@ -247,19 +248,18 @@ public class MainFrame extends JFrame implements ActionListener
 
         getContentPane().add(p2, "South");
 
-        /*feuille = new FeuilleDessin(); //500, 400);
+        feuille = new FeuilleDessin(); //500, 400);
         feuille.setBackground(Color.white);
         feuille.setSize(new Dimension(600, 400));
         feuille.setPreferredSize(new Dimension(600, 400));
 
-        getContentPane().add(feuille, "Center");*/
-
-
+        getContentPane().add(feuille, "Center");
 
         pack();
         setVisible(true);
     }
 
+   
    public void creerTortueBouton() {
 
         /*courante = new TortueAmelioree("");

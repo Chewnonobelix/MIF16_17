@@ -6,6 +6,7 @@ package tortue.Controleur.Dessin;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 import tortue.Controleur.AbstractControleur;
 import tortue.Model.Dessin.*;
 
@@ -182,4 +183,5 @@ public class ControleurDessin extends AbstractControleur
             m_tortueCourante.setAngle(dir);
         }
     }
+    
 }

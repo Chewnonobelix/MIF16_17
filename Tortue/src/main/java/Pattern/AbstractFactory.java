@@ -11,5 +11,5 @@ package Pattern;
 
 public interface AbstractFactory <T>
 {   
-    abstract T create();
+    public abstract T create();
 }

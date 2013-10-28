@@ -4,6 +4,8 @@
  */
 package tortue.Controleur;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Arnaud
@@ -15,4 +17,5 @@ public abstract class AbstractControleur extends Object
     }
     
     public abstract void exec();
+   
 }
