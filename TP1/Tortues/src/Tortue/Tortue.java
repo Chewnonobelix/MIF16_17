@@ -100,6 +100,7 @@ public class Tortue
             this.y = y;
         }   
 	
+        //A mettre dans la vue
 	public void drawTurtle (Graphics graph) {
 		if (graph==null)
 			return;
@@ -159,7 +160,7 @@ public class Tortue
 	}
 
 	/** les procedures de base de fonctionnement de la tortue */
-
+        //Amettre dans le controlleur
 	// avancer de n pas
 	public void avancer(int dist) {
 		int newX = (int) Math.round(x+dist*Math.cos(ratioDegRad*dir));
@@ -181,6 +182,8 @@ public class Tortue
 		y = newY;
 	}
 
+        
+        
 	// aller a droite
 	public void droite(int ang) {
 		dir = (dir + ang) % 360;

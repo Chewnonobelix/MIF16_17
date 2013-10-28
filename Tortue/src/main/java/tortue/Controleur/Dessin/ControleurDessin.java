@@ -2,10 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tortue.Controleur;
+package tortue.Controleur.Dessin;
 
+import java.awt.Point;
 import java.util.ArrayList;
+import tortue.Controleur.AbstractControleur;
 import tortue.Model.Dessin.*;
+
 /**
  *
  * @author Arnaud
@@ -13,80 +16,96 @@ import tortue.Model.Dessin.*;
 public class ControleurDessin extends AbstractControleur
 {
     private ArrayList<ConcreteTortue> m_tabTortue;
-
+    private ConcreteTortue m_tortueCourante;
+    private TortueFactory m_factory;
+    
     public ControleurDessin() 
     {
         m_tabTortue = new ArrayList<ConcreteTortue>();
+        m_factory = new TortueFactory();
     }
+
+    @Override
+    public void exec() 
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     public void reset()
     {
         //TODO
     }
     
-    //TODO
+    
     // avancer de n pas
-    /*public void avancer(int dist) {
-            int newX = (int) Math.round(x+dist*Math.cos(ratioDegRad*dir));
-            int newY = (int) Math.round(y+dist*Math.sin(ratioDegRad*dir));
+    public void avancer(int dist) 
+    {
+        int x = m_tortueCourante.getPosition().x;
+        int y = m_tortueCourante.getPosition().y;
+                
+            int newX = (int) Math.round(x+dist*Math.cos(AbstractTortue.ratioDegRad*m_tortueCourante.getAngle()));
+            int newY = (int) Math.round(y+dist*Math.sin(AbstractTortue.ratioDegRad*m_tortueCourante.getAngle()));
 
-            if (crayon==true) {
-                    Segment seg = new Segment();
-
-                    seg.ptStart.x = x;
-                    seg.ptStart.y = y;
-                    seg.ptEnd.x = newX;
-                    seg.ptEnd.y = newY;
-                    seg.color = decodeColor(coul);
-
-                    listSegments.add(seg);
+            if (m_tortueCourante.isLeve() == false) 
+            {
+                m_tortueCourante.deplacement(new Point(newX, newY));
             }
 
-            x = newX;
-            y = newY;
+            m_tortueCourante.getPosition().x = newX;
+            m_tortueCourante.getPosition().y = newY;
     }
 
 
-
+    
     // aller a droite
-    public void droite(int ang) {
-            dir = (dir + ang) % 360;
+   public void droite(int ang) 
+   {
+            m_tortueCourante.setAngle((m_tortueCourante.getAngle() + ang)%360);
     }
 
     // aller a gauche
-    public void gauche(int ang) {
-            dir = (dir - ang) % 360;
-    }
+    public void gauche(int ang) 
+    {
+            m_tortueCourante.setAngle((m_tortueCourante.getAngle() - ang)%360);
+   }
 
     // baisser le crayon pour dessiner
-    public void baisserCrayon() {
-            crayon = true;
+    public void baisserCrayon() 
+    {
+            m_tortueCourante.setLeve(false);
     }
 
     // lever le crayon pour ne plus dessiner
-    public void leverCrayon() {
-            crayon = false;
-    }
+    public void leverCrayon() 
+    {
+            m_tortueCourante.setLeve(true);
+     }
 
+    //TODO
+    
     // pour changer de couleur de dessin
-    public void couleur(int n) {
+    /*public void couleur(int n) {
             coul = n % 12;
     }
 
     public void couleurSuivante() {
             couleur(coul+1);
-    }
+    }*/
 
     /** quelques classiques */
 
-    /*public void carre() {
-            for (int i=0;i<4;i++) {
+    public void carre() 
+    {
+            for (int i=0;i<4;i++) 
+            {
                     avancer(100);
                     droite(90);
             }
     }
 
-    public void rectangle(int longueur, int largeur) {
+    public void rectangle(int longueur, int largeur) 
+    {
 
             avancer(longueur);
             droite(90);
@@ -100,22 +119,26 @@ public class ControleurDessin extends AbstractControleur
 
     public void poly(int n, int a) //n largeur des coté, a nombre de sommet 
     {
-            for (int j=0;j<a;j++) {
+            for (int j=0;j<a;j++) 
+            {
                     avancer(n);
                     droite(360/a);
             }
     }
 
-    public void spiral(int n, int k, int a) {
-            for (int i = 0; i < k; i++) {
-                    couleur(coul+1);
+    public void spiral(int n, int k, int a) 
+    {
+            for (int i = 0; i < k; i++) 
+            {
+                    //couleur(coul+1);
                     avancer(n);
                     droite(360/a);
                     n = n+1;
             }
     }
 
-    public void maison() {
+    public void maison() 
+    {
 
             // Murs
             carre();
@@ -148,7 +171,7 @@ public class ControleurDessin extends AbstractControleur
     public void etoile(int nbBranche, int taille)
     {
         int artemis = 360/nbBranche; //Angle des branches
-        dir = 0;
+        int dir = m_tortueCourante.getAngle();
         for(int zeus = 0; zeus < nbBranche; zeus ++)
         {
             avancer(taille);
@@ -156,6 +179,7 @@ public class ControleurDessin extends AbstractControleur
             avancer(-taille);
             baisserCrayon();
             dir += artemis;
+            m_tortueCourante.setAngle(dir);
         }
-    }*/
+    }
 }

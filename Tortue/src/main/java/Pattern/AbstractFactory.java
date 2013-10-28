@@ -9,7 +9,7 @@ package Pattern;
  * @author Arnaud
  */
 
-public abstract class AbstractFactory <T>
+public interface AbstractFactory <T>
 {   
     abstract T create();
 }

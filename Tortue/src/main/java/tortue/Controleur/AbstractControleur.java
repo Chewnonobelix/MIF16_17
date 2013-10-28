@@ -13,4 +13,6 @@ public abstract class AbstractControleur extends Object
     public AbstractControleur()
     {
     }
-    }
+    
+    public abstract void exec();
+}

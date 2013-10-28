@@ -1,6 +1,6 @@
 package tortue;
 
-import tortue.Model.Dessin.ConcreteTortue;
+import tortue.Controleur.*;
 /**
  * Hello world!
  *
@@ -9,6 +9,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        ControlerMain main = new ControlerMain();
     }
 }
