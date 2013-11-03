@@ -32,19 +32,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import tortue.Controleur.Dessin.FeuilleDessin;
 import tortue.Model.Dessin.ConcreteTortue;
 
 /**
  *
  * @author Arnaud
  */
-public class MainFrame extends JFrame implements ActionListener
+public class MainFrame extends JFrame
 {
     ConcreteTortue m_courante;
     public static final Dimension VGAP = new Dimension(1, 5);
     public static final Dimension HGAP = new Dimension(5, 1);
-    static public FeuilleDessin feuille;
+    static private FeuilleDessin m_feuille;
     private JTextField inputValue;
     private Timer timer;/**
      * 
@@ -53,9 +52,15 @@ public class MainFrame extends JFrame implements ActionListener
     public MainFrame() {
         super("un logo tout simple");
         initComponents();
-        logoInit();   
+        //logoInit();   
     }
 
+    public MainFrame(ActionListener base, ActionListener avance)
+    {
+        super("un logo tout simple");
+        initComponents();
+        logoInit(base, avance);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,15 +128,16 @@ public class MainFrame extends JFrame implements ActionListener
         m_courante = t;
     }
 
-    /*public FeuilleDessin getFeuille() {
-        return feuille;
+    static public FeuilleDessin getFeuille() 
+    {
+        return m_feuille;
     }
 
-    public void setFeuille(FeuilleDessin feuille) {
-        this.feuille = feuille;
+    static public void setFeuille(FeuilleDessin feuille) {
+        m_feuille = feuille;
     }
     
-    public void majDesListes(){
+   /* public void majDesListes(){
 	
         for(int i = 0 ; i < feuille.getTortues().size(); i++){
             
@@ -152,7 +158,9 @@ public class MainFrame extends JFrame implements ActionListener
     }*/
 
     
-    public void logoInit() {
+    public void logoInit(ActionListener base, ActionListener avance)
+    {
+        System.out.println("Logo init alpha beta");
         getContentPane().setLayout(new BorderLayout(10, 10));
 
         // Boutons
@@ -161,19 +169,19 @@ public class MainFrame extends JFrame implements ActionListener
         buttonPanel.add(toolBar);
 
         getContentPane().add(buttonPanel, "North");
-        addButton(toolBar, "Creer", "Creer une tortue", null);
-        addButton(toolBar, "Effacer", "Nouveau dessin", "/icons/New24.gif");
+        addButton(toolBar, "Creer", "Creer une tortue", null, base);
+        addButton(toolBar, "Effacer", "Nouveau dessin", "/icons/New24.gif", base);
 
         toolBar.add(Box.createRigidArea(HGAP));
         inputValue = new JTextField("45", 5);
         toolBar.add(inputValue);
-        addButton(toolBar, "Avancer", "Avancer 50", null);
-        addButton(toolBar, "Droite", "Droite 45", null);
-        addButton(toolBar, "Gauche", "Gauche 45", null);
-        addButton(toolBar, "Lever", "Lever Crayon", null);
-        addButton(toolBar, "Baisser", "Baisser Crayon", null);
-        addButton(toolBar, "Nom", "Afficher Nom Tortue", null);
-        addButton(toolBar, "Changer", "Changer de tortue", null);
+        addButton(toolBar, "Avancer", "Avancer 50", null, base);
+        addButton(toolBar, "Droite", "Droite 45", null, base);
+        addButton(toolBar, "Gauche", "Gauche 45", null, base);
+        addButton(toolBar, "Lever", "Lever Crayon", null, base);
+        addButton(toolBar, "Baisser", "Baisser Crayon", null, base);
+        addButton(toolBar, "Nom", "Afficher Nom Tortue", null, base);
+        addButton(toolBar, "Changer", "Changer de tortue", null, base);
 
         String[] colorStrings = {"noir", "bleu", "cyan", "gris fonce", "rouge",
             "vert", "gris clair", "magenta", "orange",
@@ -222,38 +230,38 @@ public class MainFrame extends JFrame implements ActionListener
         JPanel p2 = new JPanel(new GridLayout());
         JButton b20 = new JButton("Proc1");
         p2.add(b20);
-        b20.addActionListener(this);
+        b20.addActionListener(avance);
         JButton b21 = new JButton("Proc2");
         p2.add(b21);
-        b21.addActionListener(this);
+        b21.addActionListener(avance);
         JButton b22 = new JButton("Proc3");
         p2.add(b22);
-        b22.addActionListener(this);
+        b22.addActionListener(avance);
         JButton b23 = new JButton("Proc4");
         p2.add(b23);
-        b23.addActionListener(this);
+        b23.addActionListener(avance);
         JButton b24 = new JButton("Proc5");
         p2.add(b24);
-        b24.addActionListener(this);
+        b24.addActionListener(avance);
         JButton b25 = new JButton("Proc6");
         p2.add(b25);
-        b25.addActionListener(this);
+        b25.addActionListener(avance);
         JButton b26 = new JButton("Proc7");
         p2.add(b26);
-        b26.addActionListener(this);
+        b26.addActionListener(avance);
         JButton b27 = new JButton("Proc8");
         p2.add(b27);
-        b27.addActionListener(this);
+        b27.addActionListener(avance);
 
 
         getContentPane().add(p2, "South");
 
-        feuille = new FeuilleDessin(); //500, 400);
-        feuille.setBackground(Color.white);
-        feuille.setSize(new Dimension(600, 400));
-        feuille.setPreferredSize(new Dimension(600, 400));
+        m_feuille = new FeuilleDessin(); //500, 400);
+        m_feuille.setBackground(Color.white);
+        m_feuille.setSize(new Dimension(600, 400));
+        m_feuille.setPreferredSize(new Dimension(600, 400));
 
-        getContentPane().add(feuille, "Center");
+        getContentPane().add(m_feuille, "Center");
 
         pack();
         setVisible(true);
@@ -293,202 +301,7 @@ public class MainFrame extends JFrame implements ActionListener
     /**
      * la gestion des actions des boutons
      */
-    public void actionPerformed(ActionEvent e) {
-        String c = e.getActionCommand();
-        // actions des boutons du haut
-        /*switch (c) {
-            case "Avancer":
-               if(courante != null) {
-                    try {
-                        int v = Integer.parseInt(inputValue.getText());
-                        courante.avancer(v);
-                    } catch (NumberFormatException ex) {
-                        System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-                    }
-               }
-                break;
-            case "Droite":
-                if(courante != null) {
-                    try {
-                        int v = Integer.parseInt(inputValue.getText());
-                        courante.droite(v);
-                    } catch (NumberFormatException ex) {
-                        System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-                    }
-                }
-                break;
-            case "Gauche":
-                if(courante != null) {
-                    try {
-                        int v = Integer.parseInt(inputValue.getText());
-                        courante.gauche(v);
-                    } catch (NumberFormatException ex) {
-                        System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-                    }
-                }
-                break;
-            case "Lever":
-                if(courante != null) {
-                    courante.leverCrayon();
-                }
-                break;
-            case "Baisser":
-                if(courante != null) {
-                    courante.baisserCrayon();
-                }    
-                break;
-            case "Nom": {
-                if(courante != null) {
-                    ((TortueAmelioree) courante).afficherNom();
-                }
-            }
-            break;
-            case "Changer": {
-                if(courante != null) {
-                    changerTortueBouton();
-                }
-            }
-            break;
-            case "Creer":
-                creerTortueBouton();
-                break;
-            case "Proc1":
-                proc1();
-                break;
-            case "Proc2":
-                proc2();
-                break;
-            case "Proc3":
-                proc3();
-                break;
-            case "Proc4":
-                proc4();
-                break;
-            case "Proc5":
-                proc5();
-                break;
-            case "Proc6":
-                proc6();
-                break;
-            case "Proc7":
-                proc7();
-                break;
-
-            case "Proc8":
-                proc8();
-                break;
-
-            case "Effacer":
-                effacer();
-                break;
-            case "Quitter":
-                quitter();
-                break;
-        }
-
-        feuille.repaint();*/
-    }
-
-    /**
-     * les procedures Logo qui combine plusieurs commandes..
-     */
-    public void proc1() {
-        //m_courante.carre();
-    }
-
-    public void proc2() {
-        //courante.poly(60, 8);
-    }
-
-    public void proc3() {
-        //courante.spiral(50, 40, 6);
-    }
-
-    public void proc4() {
-        //courante.maison();
-    }
-
-    public void proc5() {
-        //courante.etoile(8, 100);
-    }
     
-    public void proc6() {
-		                
-        /*for(int i = 0; i < 15; i++){
-
-            TortueAmelioree tortue = new TortueAmelioree("tortue"+i);
-            feuille.addTortue(tortue);
-            
-            tortue.setPosition(500 / 2, 400 / 2);
-
-        }
-                
-        majDesListes();
-        
-        timer = new Timer();
-	timer.schedule (new TimerTask() {
-            public void run()
-            {
-                TortueAmelioree temp = null;
-                
-            	for(int i = 0; i < 15; i++){
-            
-                    temp = (TortueAmelioree)feuille.getTortues().get(i);
-                    temp.deplacement(20);
-                    temp.croisement();
-                    feuille.repaint();
-                
-                }
-            }
-        }, 0, 500);*/
-    }
-    
-    public void proc7() {
-
-		 
-        /*JeuDeBalle jeu = new JeuDeBalle(feuille);
-        jeu.lancePartie(timer);*/
-	
-    }
-    
-    public void proc8() {
-		 
-        /*JeuEquipe jeu = new JeuEquipe(feuille);
-        jeu.lancePartie(timer);
-
-		                
-        for(int i = 0; i < 15; i++){
-            
-            courante = new TortueBalle("tortue"+i);
-            feuille.addTortue(courante);
-            
-            courante.setPosition(500 / 2, 400 / 2);
-        }
-                
-        majDesListesBalle();
-        
-        /*JeuDeBalle jeu = new JeuDeBalle(feuille,feuille.getTortues());
-        timer = new Timer();
-        jeu.lancePartie(timer);*/
-        
-        /*timer = new Timer();
-	timer.schedule (new TimerTask() {
-            public void run()
-            {
-                TortueBalle temp = null;
-                
-            	for(int i = 0; i < 15; i++){
-            
-                    temp = (TortueBalle)feuille.getTortues().get(i);
-                    temp.deplacement(20);
-                    temp.croisement();
-                    feuille.repaint();
-                
-                }
-            }
-        }, 0, 500);*/
-	
-    }
     
     // efface tout et reinitialise la feuille
 
@@ -505,7 +318,7 @@ public class MainFrame extends JFrame implements ActionListener
     }
 
     //utilitaires pour installer des boutons et des menus
-    public void addButton(JComponent p, String name, String tooltiptext, String imageName) {
+    public void addButton(JComponent p, String name, String tooltiptext, String imageName, ActionListener l) {
         JButton b;
         if ((imageName == null) || (imageName.equals(""))) {
             b = (JButton) p.add(new JButton(name));
@@ -523,7 +336,7 @@ public class MainFrame extends JFrame implements ActionListener
         b.setToolTipText(tooltiptext);
         b.setBorder(BorderFactory.createRaisedBevelBorder());
         b.setMargin(new Insets(0, 0, 0, 0));
-        b.addActionListener(this);
+        b.addActionListener(l);
     }
 
     public void addMenuItem(JMenu m, String label, String command, int key) {
@@ -532,7 +345,7 @@ public class MainFrame extends JFrame implements ActionListener
         m.add(menuItem);
 
         menuItem.setActionCommand(command);
-        menuItem.addActionListener(this);
+        //menuItem.addActionListener(this);
         if (key > 0) {
             if (key != KeyEvent.VK_DELETE) {
                 menuItem.setAccelerator(KeyStroke.getKeyStroke(key, Event.CTRL_MASK, false));
@@ -541,6 +354,7 @@ public class MainFrame extends JFrame implements ActionListener
             }
         }
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

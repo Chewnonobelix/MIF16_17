@@ -4,13 +4,14 @@
  */
 package tortue.Controleur;
 
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Arnaud
  */
-public abstract class AbstractControleur extends Object
+public abstract class AbstractControleur
 {
     public AbstractControleur()
     {

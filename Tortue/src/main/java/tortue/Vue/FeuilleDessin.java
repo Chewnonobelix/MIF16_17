@@ -2,12 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tortue.Controleur.Dessin;
+package tortue.Vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Iterator;
+import tortue.Controleur.Dessin.ControleurDessin;
+import tortue.Model.Dessin.AbstractTortue;
+import tortue.Model.Dessin.Segment;
 
 /**
  *
@@ -18,31 +21,46 @@ public class FeuilleDessin extends javax.swing.JPanel {
     /**
      * Creates new form FeuilleDessin
      */
-    public FeuilleDessin() {
+    private Dimension m_dim;
+    
+    public FeuilleDessin() 
+    {
         initComponents();
     }
 
-    public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+    public Dimension getdim() 
+    {
+        return m_dim;
+    }
+    
+    public void paintComponent(Graphics g) 
+    {
+        super.paintComponent(g);
 
-		Color c = g.getColor();
-		
-		Dimension dim = getSize();
-		g.setColor(Color.white);
-		g.fillRect(0,0,dim.width, dim.height);
-		g.setColor(c);
+        Color c = g.getColor();
 
-		showTurtles(g);
-	}
+        m_dim = getSize();
+        g.setColor(Color.white);
+        g.fillRect(0,0,m_dim.width, m_dim.height);
+        g.setColor(c);
+
+        showTurtles(g);
+    }
 	
-	public void showTurtles(Graphics g) {
-		/*for(Iterator it = tortues.iterator();it.hasNext();) {
-			TortueAmelioree t = (TortueAmelioree) it.next();
-			t.drawTurtle(g);
-                        g.setColor(Color.BLACK);
-                        g.drawString(t.getNom(),t.getX(),t.getY());
-		}*/
-	}
+    public void showTurtles(Graphics g) 
+    {         
+        for(Iterator it = ControleurDessin.getTabTortue().iterator();it.hasNext();)
+        {
+            AbstractTortue t = (AbstractTortue)it.next();
+            g.setColor(Color.BLACK);
+
+            for(Iterator it2 = t.getTrace().iterator(); it2.hasNext();)
+            {
+                Segment s = (Segment)it2.next();
+                g.drawLine(s.getStart().x, s.getStart().y, s.getEnd().x, s.getEnd().y);
+            }           
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

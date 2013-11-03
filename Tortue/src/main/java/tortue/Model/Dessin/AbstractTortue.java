@@ -28,7 +28,7 @@ public abstract class AbstractTortue
     public AbstractTortue() 
     {
         m_trace = new ArrayList<Segment>();
-        m_position = new Point();
+        m_position = new Point(250,200);
         reset();
     }
 
@@ -116,8 +116,8 @@ public abstract class AbstractTortue
     public void reset()
     {
         getTrace().clear();
-        getPosition().x = 0;
-        getPosition().y = 0;
+        getPosition().x = 250;
+        getPosition().y = 200;
         //setCouleur(Color.decode(Color.BLACK.toString()));
         setAngle(-90);
         setLeve(false);
