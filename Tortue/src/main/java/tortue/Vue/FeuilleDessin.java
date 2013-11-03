@@ -52,11 +52,11 @@ public class FeuilleDessin extends javax.swing.JPanel {
         for(Iterator it = ControleurDessin.getTabTortue().iterator();it.hasNext();)
         {
             AbstractTortue t = (AbstractTortue)it.next();
-            g.setColor(Color.BLACK);
-
+            
             for(Iterator it2 = t.getTrace().iterator(); it2.hasNext();)
             {
                 Segment s = (Segment)it2.next();
+                g.setColor(s.getColor());
                 g.drawLine(s.getStart().x, s.getStart().y, s.getEnd().x, s.getEnd().y);
             }           
         }

@@ -6,7 +6,7 @@ package tortue.Controleur.Dessin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import tortue.Model.Dessin.ConcreteTortue;
+import tortue.Model.Dessin.Tortue;
 import tortue.Vue.MainFrame;
 
 /**
@@ -33,11 +33,10 @@ public class ListenerProcedureAvance implements ActionListener
     {
         String c = e.getActionCommand();
         // actions des boutons du haut
-        ConcreteTortue courante = m_dessin.getTortueCourante();
+        Tortue courante = m_dessin.getTortueCourante();
         switch (c) 
         {
             case "Proc1":
-                System.out.println("Carre?" + courante);
                 if(courante != null)
                 {
                     courante.carre();
@@ -79,13 +78,12 @@ public class ListenerProcedureAvance implements ActionListener
                 break;
 
             case "Effacer":
-                //effacer();
+                m_dessin.reset();
                 break;
             case "Quitter":
                 //quitter();
                 break;
         }
-        System.out.println(m_frame);
         MainFrame.getFeuille().repaint();
     }
     

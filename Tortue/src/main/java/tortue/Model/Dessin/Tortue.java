@@ -10,10 +10,10 @@ import java.awt.Point;
  *
  * @author Arnaud
  */
-public class ConcreteTortue extends AbstractTortue
+public class Tortue extends AbstractTortue
 {
 
-    public ConcreteTortue() 
+    public Tortue() 
     {
     }
     
@@ -29,6 +29,10 @@ public class ConcreteTortue extends AbstractTortue
         if (isLeve() == false) 
         {
             deplacement(new Point(newX, newY));
+        }
+        else
+        {
+            setPosition(new Point(newX, newY));
         }
     }
 
@@ -55,18 +59,7 @@ public class ConcreteTortue extends AbstractTortue
     {
         setLeve(true);
     }
-
-    //TODO
     
-    // pour changer de couleur de dessin
-    /*public void couleur(int n) {
-            coul = n % 12;
-    }
-
-    public void couleurSuivante() {
-            couleur(coul+1);
-    }*/
-
     /** quelques classiques */
 
     public void carre() 
@@ -103,10 +96,10 @@ public class ConcreteTortue extends AbstractTortue
     {
         for (int i = 0; i < k; i++) 
         {
-                //couleur(coul+1);
-                avancer(n);
-                droite(360/a);
-                n = n+1;
+            couleurSuivante();
+            avancer(n);
+            droite(360/a);
+            n = n+1;
         }
     }
 

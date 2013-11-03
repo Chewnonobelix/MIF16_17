@@ -5,15 +5,15 @@
 package tortue.Controleur.Dessin;
 
 import Pattern.AbstractFactory;
-import tortue.Model.Dessin.ConcreteTortue;
+import tortue.Model.Dessin.Tortue;
 /**
  *
  * @author Arnaud
  */
-public class TortueFactory implements AbstractFactory<ConcreteTortue>
+public class TortueFactory implements AbstractFactory<Tortue>
 {
-    public ConcreteTortue create() 
+    public Tortue create() 
     {
-        return new ConcreteTortue();
+        return new Tortue();
     }
 }

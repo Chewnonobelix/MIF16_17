@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import tortue.Model.Dessin.ConcreteTortue;
+import tortue.Model.Dessin.Tortue;
 
 /**
  *
@@ -40,7 +40,7 @@ import tortue.Model.Dessin.ConcreteTortue;
  */
 public class MainFrame extends JFrame
 {
-    ConcreteTortue m_courante;
+    Tortue m_courante;
     public static final Dimension VGAP = new Dimension(1, 5);
     public static final Dimension HGAP = new Dimension(5, 1);
     static private FeuilleDessin m_feuille;
@@ -124,7 +124,7 @@ public class MainFrame extends JFrame
         System.exit(0);
     }
 
-    void setTortueCourante(ConcreteTortue t) {
+    void setTortueCourante(Tortue t) {
         m_courante = t;
     }
 
@@ -169,8 +169,8 @@ public class MainFrame extends JFrame
         buttonPanel.add(toolBar);
 
         getContentPane().add(buttonPanel, "North");
-        addButton(toolBar, "Creer", "Creer une tortue", null, base);
-        addButton(toolBar, "Effacer", "Nouveau dessin", "/icons/New24.gif", base);
+        addButton(toolBar, "Creer", "Creer une tortue", null, avance);
+        addButton(toolBar, "Effacer", "Nouveau dessin", "/icons/New24.gif", avance);
 
         toolBar.add(Box.createRigidArea(HGAP));
         inputValue = new JTextField("45", 5);

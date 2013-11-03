@@ -6,7 +6,7 @@ package tortue.Controleur.Dessin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import tortue.Model.Dessin.ConcreteTortue;
+import tortue.Model.Dessin.Tortue;
 import tortue.Vue.MainFrame;
 
 /**
@@ -34,7 +34,7 @@ public class ListenerProcedureBase implements ActionListener
     {
         String c = e.getActionCommand();
         // actions des boutons du haut
-        ConcreteTortue courante = m_dessin.getTortueCourante();
+        Tortue courante = m_dessin.getTortueCourante();
         
         switch (c) 
         {

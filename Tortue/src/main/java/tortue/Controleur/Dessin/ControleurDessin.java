@@ -20,13 +20,13 @@ import tortue.Vue.MainFrame;
  */
 public class ControleurDessin extends AbstractControleur
 {
-    static private ArrayList<ConcreteTortue> m_tabTortue;
-    static private ConcreteTortue m_tortueCourante;
+    static private ArrayList<Tortue> m_tabTortue;
+    static private Tortue m_tortueCourante;
     static private TortueFactory m_factory;
     
     public ControleurDessin() 
     {
-        m_tabTortue = new ArrayList<ConcreteTortue>();
+        m_tabTortue = new ArrayList<Tortue>();
         m_factory = new TortueFactory();
         addTortue(m_factory.create());
         setTortueCourante(getTabTortue().get(0));
@@ -41,29 +41,33 @@ public class ControleurDessin extends AbstractControleur
     
     public void reset()
     {
-        //TODO
+        m_tabTortue.clear();
+        System.out.println(m_tabTortue.size());
+        m_tortueCourante = m_factory.create();
+        m_tabTortue.add(m_tortueCourante);
+        MainFrame.getFeuille().repaint();
     }
 
-    public static ArrayList<ConcreteTortue> getTabTortue()
+    public static ArrayList<Tortue> getTabTortue()
     {
         return m_tabTortue;
     }
     
-    public static void setTortueCourante(ConcreteTortue tortueCourante) 
+    public static void setTortueCourante(Tortue tortueCourante) 
     {
         m_tortueCourante = tortueCourante;
     }
     
-    public static ConcreteTortue getTortueCourante()
+    public static Tortue getTortueCourante()
     {
         return m_tortueCourante;
     }
-    public static void addTortue(ConcreteTortue leonardo)
+    public static void addTortue(Tortue leonardo)
     {
         m_tabTortue.add(leonardo);
     }
     
-    public static void removeTortue(ConcreteTortue raphaello)
+    public static void removeTortue(Tortue raphaello)
     {
         m_tabTortue.remove(raphaello);
     }

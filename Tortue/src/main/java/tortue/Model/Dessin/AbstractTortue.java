@@ -14,12 +14,13 @@ import java.util.ArrayList;
  */
 public abstract class AbstractTortue
 {
-    private Point m_position;
+    private Point m_position = new Point(250,200);
     private int m_angle;
     private int m_taille;
     private Color m_couleur;
+    private int m_indexCouleur;
     private boolean m_leve;
-    private ArrayList<Segment> m_trace;
+    private ArrayList<Segment> m_trace = new ArrayList<Segment>();
     
     // Attributs statiques	
     public static final int rp=10, rb=5; // Taille de la pointe et de la base de la fleche
@@ -27,8 +28,6 @@ public abstract class AbstractTortue
         
     public AbstractTortue() 
     {
-        m_trace = new ArrayList<Segment>();
-        m_position = new Point(250,200);
         reset();
     }
 
@@ -62,9 +61,10 @@ public abstract class AbstractTortue
         m_angle = angle;
     }
 
-    public void setCouleur(Color couleur) 
+    public void setCouleur(int couleur) 
     {
-        m_couleur = couleur;
+        m_indexCouleur = couleur%12;
+        m_couleur = decodeColor(m_indexCouleur);
     }
 
     public void setTaille(int taille)
@@ -118,9 +118,33 @@ public abstract class AbstractTortue
         getTrace().clear();
         getPosition().x = 250;
         getPosition().y = 200;
-        //setCouleur(Color.decode(Color.BLACK.toString()));
+        setCouleur(0);
         setAngle(-90);
         setLeve(false);
+    }
+    
+    public void couleurSuivante() 
+    {
+        setCouleur(m_indexCouleur + 1);
+    }
+    
+    protected Color decodeColor(int c) 
+    {
+        switch(c) 
+        {
+            case 1: return(Color.blue);
+            case 2: return(Color.cyan);
+            case 3: return(Color.darkGray);
+            case 4: return(Color.red);
+            case 5: return(Color.green);
+            case 6: return(Color.lightGray);
+            case 7: return(Color.magenta);
+            case 8: return(Color.orange);
+            case 9: return(Color.gray);
+            case 10: return(Color.pink);
+            case 11: return(Color.yellow);
+            default : return(Color.black);
+        }
     }
 }
 
