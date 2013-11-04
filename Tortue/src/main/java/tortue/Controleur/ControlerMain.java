@@ -6,6 +6,7 @@ package tortue.Controleur;
 
 import Pattern.AbstractFactory;
 import tortue.Controleur.Dessin.ControleurDessin;
+import tortue.Controleur.Dessin.ListenerCombo;
 import tortue.Controleur.Dessin.ListenerProcedureAvance;
 import tortue.Controleur.Dessin.ListenerProcedureBase;
 import tortue.Vue.MainFrame;
@@ -22,8 +23,10 @@ public class ControlerMain
     {
         ListenerProcedureAvance avance = new ListenerProcedureAvance();
         ListenerProcedureBase base = new ListenerProcedureBase();
+        ListenerCombo combo = new ListenerCombo();
+        
         m_controleur = new ControleurDessin();
-        m_mainWindow = new MainFrame(base, avance);
+        m_mainWindow = new MainFrame(base, avance, combo);
         System.out.println(m_mainWindow);
         System.out.println(m_mainWindow.getFeuille());
         base.setControleur((ControleurDessin)m_controleur);

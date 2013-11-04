@@ -77,9 +77,7 @@ public class ListenerProcedureAvance implements ActionListener
                 //proc8();
                 break;
 
-            case "Effacer":
-                m_dessin.reset();
-                break;
+            
             case "Quitter":
                 //quitter();
                 break;

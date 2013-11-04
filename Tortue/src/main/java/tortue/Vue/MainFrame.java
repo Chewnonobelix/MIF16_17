@@ -55,11 +55,11 @@ public class MainFrame extends JFrame
         //logoInit();   
     }
 
-    public MainFrame(ActionListener base, ActionListener avance)
+    public MainFrame(ActionListener base, ActionListener avance, ActionListener combo)
     {
         super("un logo tout simple");
         initComponents();
-        logoInit(base, avance);
+        logoInit(base, avance, combo);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,7 +158,7 @@ public class MainFrame extends JFrame
     }*/
 
     
-    public void logoInit(ActionListener base, ActionListener avance)
+    public void logoInit(ActionListener base, ActionListener avance, ActionListener combo)
     {
         System.out.println("Logo init alpha beta");
         getContentPane().setLayout(new BorderLayout(10, 10));
@@ -169,8 +169,8 @@ public class MainFrame extends JFrame
         buttonPanel.add(toolBar);
 
         getContentPane().add(buttonPanel, "North");
-        addButton(toolBar, "Creer", "Creer une tortue", null, avance);
-        addButton(toolBar, "Effacer", "Nouveau dessin", "/icons/New24.gif", avance);
+        addButton(toolBar, "Creer", "Creer une tortue", null, base);
+        addButton(toolBar, "Effacer", "Nouveau dessin", "/icons/New24.gif", base);
 
         toolBar.add(Box.createRigidArea(HGAP));
         inputValue = new JTextField("45", 5);
@@ -194,13 +194,7 @@ public class MainFrame extends JFrame
         JComboBox colorList = new JComboBox(colorStrings);
         toolBar.add(colorList);
 
-        colorList.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JComboBox cb = (JComboBox) e.getSource();
-                int n = cb.getSelectedIndex();
-                //m_courante.setColor(n);
-            }
-        });
+        colorList.addActionListener(combo);
 
         // Menus
         JMenuBar menubar = new JMenuBar();

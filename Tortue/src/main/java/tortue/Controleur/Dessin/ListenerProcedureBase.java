@@ -38,6 +38,10 @@ public class ListenerProcedureBase implements ActionListener
         
         switch (c) 
         {
+            case "Effacer":
+                m_dessin.reset();
+                break;
+                
             case "Avancer":
                 if(courante != null) 
                 {
