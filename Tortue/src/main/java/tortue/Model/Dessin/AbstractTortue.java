@@ -213,16 +213,6 @@ public abstract class AbstractTortue
         return m_trace;
     }
     
-    public Segment getLastSegment()
-    {
-        if(!getTrace().isEmpty())
-        {
-            return getTrace().get(getTrace().size() - 1);
-        }
-        
-        return null;
-    }
-    
     protected void addSegment(Segment seg)
     {
         getTrace().add(seg);
