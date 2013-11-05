@@ -78,9 +78,7 @@ public class ListenerProcedureAvance implements ActionListener
                 break;
 
             
-            case "Quitter":
-                //quitter();
-                break;
+            
         }
         MainFrame.getFeuille().repaint();
     }

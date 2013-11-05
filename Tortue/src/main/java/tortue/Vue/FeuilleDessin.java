@@ -7,10 +7,13 @@ package tortue.Vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Polygon;
 import java.util.Iterator;
 import tortue.Controleur.Dessin.ControleurDessin;
 import tortue.Model.Dessin.AbstractTortue;
 import tortue.Model.Dessin.Segment;
+import tortue.Model.Dessin.Tortue;
 
 /**
  *
@@ -53,13 +56,51 @@ public class FeuilleDessin extends javax.swing.JPanel {
         {
             AbstractTortue t = (AbstractTortue)it.next();
             
-            for(Iterator it2 = t.getTrace().iterator(); it2.hasNext();)
-            {
-                Segment s = (Segment)it2.next();
-                g.setColor(s.getColor());
-                g.drawLine(s.getStart().x, s.getStart().y, s.getEnd().x, s.getEnd().y);
-            }           
+            drawTurtle(g, t);
         }
+    }
+    
+    private void drawTurtle(Graphics graph, AbstractTortue t)
+    {
+        if (graph==null)
+            return;
+		
+		// Dessine les segments
+        for(Iterator it = t.getTrace().iterator();it.hasNext();) 
+        {
+                Segment seg = (Segment) it.next(); 
+                graph.setColor(seg.getColor());
+                graph.drawLine(seg.getStart().x, seg.getStart().y, seg.getEnd().x, seg.getEnd().y);
+        }
+
+        //Calcule les 3 coins du triangle a partir de
+        // la position de la tortue p
+        Point p = new Point(t.getPosition().x,t.getPosition().y);
+        Polygon arrow = new Polygon();
+
+        //Calcule des deux bases
+        //Angle de la droite
+        double theta=Tortue.ratioDegRad*(-t.getAngle());
+        //Demi angle au sommet du triangle
+        double alpha=Math.atan( (float)Tortue.rb / (float)Tortue.rp );
+        //Rayon de la fleche
+        double r=Math.sqrt( Tortue.rp*Tortue.rp + Tortue.rb*Tortue.rb );
+        //Sens de la fleche
+
+        //Pointe
+        Point p2=new Point((int) Math.round(p.x+r*Math.cos(theta)),
+                                         (int) Math.round(p.y-r*Math.sin(theta)));
+        arrow.addPoint(p2.x,p2.y);
+        arrow.addPoint((int) Math.round( p2.x-r*Math.cos(theta + alpha) ),
+          (int) Math.round( p2.y+r*Math.sin(theta + alpha) ));
+
+        //Base2
+        arrow.addPoint((int) Math.round( p2.x-r*Math.cos(theta - alpha) ),
+          (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
+
+        arrow.addPoint(p2.x,p2.y);
+        graph.setColor(Color.green);
+        graph.fillPolygon(arrow);
     }
     /**
      * This method is called from within the constructor to initialize the form.

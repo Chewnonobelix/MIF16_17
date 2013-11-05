@@ -120,9 +120,6 @@ public class MainFrame extends JFrame
             }
         });
     }
-    private void quitter() {
-        System.exit(0);
-    }
 
     void setTortueCourante(Tortue t) {
         m_courante = t;
@@ -160,7 +157,6 @@ public class MainFrame extends JFrame
     
     public void logoInit(ActionListener base, ActionListener avance, ActionListener combo)
     {
-        System.out.println("Logo init alpha beta");
         getContentPane().setLayout(new BorderLayout(10, 10));
 
         // Boutons
@@ -202,21 +198,21 @@ public class MainFrame extends JFrame
         JMenu menuFile = new JMenu("File"); // on installe le premier menu
         menubar.add(menuFile);
 
-        addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
-        addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
+        addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N, base);
+        addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q, base);
 
         JMenu menuCommandes = new JMenu("Commandes"); // on installe le premier menu
         menubar.add(menuCommandes);
-        addMenuItem(menuCommandes, "Avancer", "Avancer", -1);
-        addMenuItem(menuCommandes, "Droite", "Droite", -1);
-        addMenuItem(menuCommandes, "Gauche", "Gauche", -1);
-        addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1);
-        addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1);
+        addMenuItem(menuCommandes, "Avancer", "Avancer", -1, base);
+        addMenuItem(menuCommandes, "Droite", "Droite", -1, base);
+        addMenuItem(menuCommandes, "Gauche", "Gauche", -1, base);
+        addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1, base);
+        addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1, base);
 
         JMenu menuHelp = new JMenu("Aide"); // on installe le premier menu
         menubar.add(menuHelp);
-        addMenuItem(menuHelp, "Aide", "Help", -1);
-        addMenuItem(menuHelp, "A propos", "About", -1);
+        addMenuItem(menuHelp, "Aide", "Help", -1, null);
+        addMenuItem(menuHelp, "A propos", "About", -1, null);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -297,19 +293,6 @@ public class MainFrame extends JFrame
      */
     
     
-    // efface tout et reinitialise la feuille
-
-    public void effacer() {
-
-        /*timer.cancel();
-        feuille.reset();
-        feuille.repaint();
-        
-
-        // Replace la tortue au centre
-        Dimension size = feuille.getSize();
-        courante.setPosition(size.width / 2, size.height / 2);*/
-    }
 
     //utilitaires pour installer des boutons et des menus
     public void addButton(JComponent p, String name, String tooltiptext, String imageName, ActionListener l) {
@@ -333,13 +316,13 @@ public class MainFrame extends JFrame
         b.addActionListener(l);
     }
 
-    public void addMenuItem(JMenu m, String label, String command, int key) {
+    public void addMenuItem(JMenu m, String label, String command, int key, ActionListener l) {
         JMenuItem menuItem;
         menuItem = new JMenuItem(label);
         m.add(menuItem);
 
         menuItem.setActionCommand(command);
-        //menuItem.addActionListener(this);
+        menuItem.addActionListener(l);
         if (key > 0) {
             if (key != KeyEvent.VK_DELETE) {
                 menuItem.setAccelerator(KeyStroke.getKeyStroke(key, Event.CTRL_MASK, false));

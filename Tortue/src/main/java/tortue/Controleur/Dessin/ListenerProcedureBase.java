@@ -42,6 +42,10 @@ public class ListenerProcedureBase implements ActionListener
                 m_dessin.reset();
                 break;
                 
+            case "Quitter":
+                System.exit(0);
+                break;
+                    
             case "Avancer":
                 if(courante != null) 
                 {
@@ -105,13 +109,14 @@ public class ListenerProcedureBase implements ActionListener
                 break;
             case "Changer":
             {
-                /*if(courante != null) {
-                    changerTortueBouton();
-                }*/
+                if(courante != null) 
+                {
+                    m_dessin.nextTortue();
+                }
             }
             break;
             case "Creer":
-                //creerTortueBouton();
+                m_dessin.creerTortue();
                 break;
         }
         

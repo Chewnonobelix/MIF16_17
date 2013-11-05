@@ -42,7 +42,6 @@ public class ControleurDessin extends AbstractControleur
     public void reset()
     {
         m_tabTortue.clear();
-        System.out.println(m_tabTortue.size());
         m_tortueCourante = m_factory.create();
         m_tabTortue.add(m_tortueCourante);
         MainFrame.getFeuille().repaint();
@@ -71,4 +70,19 @@ public class ControleurDessin extends AbstractControleur
     {
         m_tabTortue.remove(raphaello);
     }
+    
+    public void creerTortue()
+    {
+        Tortue t = m_factory.create();
+        m_tabTortue.add(t);
+        m_tortueCourante = t;
+    }
+    
+   public void nextTortue()
+   {
+       int index = m_tabTortue.indexOf(m_tortueCourante);
+       index++;
+       index %= m_tabTortue.size();
+       m_tortueCourante = m_tabTortue.get(index);
+   }
 }
