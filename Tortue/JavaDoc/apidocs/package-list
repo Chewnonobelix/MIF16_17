@@ -1,0 +1,10 @@
+Pattern
+tortue
+tortue.Controleur
+tortue.Controleur.Dessin
+tortue.Controleur.Jeu
+tortue.Model.Dessin
+tortue.Model.Jeu
+tortue.Vue
+tortue.Vue.Dessin
+tortue.Vue.Jeu
