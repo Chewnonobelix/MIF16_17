@@ -14,13 +14,23 @@ import javax.swing.JComboBox;
  */
 public class ListenerCombo implements ActionListener
 {
-
+    private ControleurDessin m_dessin;
+    
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        JComboBox cb = (JComboBox) e.getSource();
-        int n = cb.getSelectedIndex();
-        ControleurDessin.getTortueCourante().setCouleur(n);
+        if(m_dessin != null)
+        {
+            JComboBox cb = (JComboBox) e.getSource();
+            int n = cb.getSelectedIndex();
+            ControleurDessin.getTortueCourante().setCouleur(n);
+        }
     }
+
+    public void setDessin(ControleurDessin dessin) 
+    {
+        m_dessin = dessin;
+    }
+    
     
 }

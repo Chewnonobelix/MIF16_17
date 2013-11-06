@@ -6,6 +6,8 @@ package tortue.Model.Jeu;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -19,17 +21,25 @@ public class JeuEquipe extends JeuDeBalle
     @Override
     public void exec() 
     {
-        for(Iterator it = m_listeEquipe.iterator(); it.hasNext();)
-        {
-            EquipeTortue e = (EquipeTortue)it.next();
-            
-            for(Iterator it2 = e.getMembreEquipe().iterator(); it2.hasNext();)
+        Timer time = new Timer();
+        
+        time.schedule (new TimerTask() {
+            public void run()
             {
-                TortueEquipe t = (TortueEquipe)it2.next();
-                
-                t.deplacement();
-            }
-        }
+        
+                for(Iterator it = m_listeEquipe.iterator(); it.hasNext();)
+                {
+                    EquipeTortue e = (EquipeTortue)it.next();
+
+                    for(Iterator it2 = e.getMembreEquipe().iterator(); it2.hasNext();)
+                    {
+                        TortueEquipe t = (TortueEquipe)it2.next();
+
+                        t.deplacement();
+                    }
+                }
+                notifier();
+            }}, 0, 100);
     }
 
     public ArrayList<EquipeTortue> getListeEquipe() 

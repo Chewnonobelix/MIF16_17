@@ -10,26 +10,32 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.util.Iterator;
-import tortue.Controleur.Dessin.ControleurDessin;
+import javax.swing.JPanel;
+import tortue.Controleur.Jeu.ControleurJeu;
 import tortue.Model.Dessin.AbstractTortue;
 import tortue.Model.Dessin.Segment;
 import tortue.Model.Dessin.Tortue;
+import tortue.Model.Jeu.JeuDeBalle;
 import tortue.Model.Jeu.Observer;
-import tortue.Vue.AbstractFeuille;
+
 
 /**
  *
  * @author Chewnonobelix
  */
-public class Terrain extends AbstractFeuille implements Observer
+public class Terrain extends JPanel implements Observer
 {
     private Dimension m_dim;
     
     public Terrain() 
     {
         initComponents();
+        setBackground(Color.white);
+        setSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 400));
     }
 
+    @Override
     public void paintComponent(Graphics g) 
     {
         super.paintComponent(g);
@@ -46,7 +52,7 @@ public class Terrain extends AbstractFeuille implements Observer
     
     public void showTurtles(Graphics g) 
     {         
-        for(Iterator it = ControleurDessin.getTabTortue().iterator();it.hasNext();)
+        for(Iterator it = JeuDeBalle.getListeJoueur().iterator();it.hasNext();)
         {
             AbstractTortue t = (AbstractTortue)it.next();
             

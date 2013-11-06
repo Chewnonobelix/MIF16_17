@@ -6,6 +6,7 @@ package tortue.Model.Jeu;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class EquipeTortue 
 {
-    public static final int tailleEquipe = 11;
+    public static final int tailleEquipe = 2;
     private String m_nomEquipe;
     private Color m_couleur = Color.BLACK;
     private ArrayList<TortueEquipe> m_membreEquipe = new ArrayList<>();
@@ -46,6 +47,12 @@ public class EquipeTortue
     public void setCouleur(Color couleur) 
     {
         m_couleur = couleur;
+        
+        for(Iterator it = m_membreEquipe.iterator(); it.hasNext();)
+        {
+            TortueEquipe t = (TortueEquipe)it.next();
+            t.setCouleur(m_couleur);
+        }
     }
 
     public void setMembreEquipe(ArrayList<TortueEquipe> membreEquipe)

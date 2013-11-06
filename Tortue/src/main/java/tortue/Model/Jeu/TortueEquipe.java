@@ -15,19 +15,20 @@ import tortue.Model.Dessin.AbstractTortue;
  */
 public class TortueEquipe extends AbstractTortue
 {
-    public static final int deplacement = 5;
+    public static final int deplacement = 10;
     
     private EquipeTortue m_equipe;
     private Balle m_balle;
     
     public TortueEquipe(EquipeTortue e) 
     {
-        setLeve(true);
+        setLeve(false);
         m_equipe = e;
         setCouleur(e.getCouleur());
         Point pos = new Point();
         
         Random r = new Random();
+        r.setSeed(0);
         int tp = r.nextInt(400);
         pos.x = tp;
         
@@ -89,7 +90,7 @@ public class TortueEquipe extends AbstractTortue
         try 
         {
 		Random rand = new Random();
-		setAngle(rand.nextInt(90)-45);
+		setAngle(rand.nextInt(360));
 		this.avancer(TortueEquipe.deplacement);
 			
 		/*if(getPosition().x + TortueEquipe.deplacement <= 15 ||

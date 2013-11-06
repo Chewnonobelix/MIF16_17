@@ -44,7 +44,7 @@ public class MainFrame extends JFrame
     Tortue m_courante;
     public static final Dimension VGAP = new Dimension(1, 5);
     public static final Dimension HGAP = new Dimension(5, 1);
-    private AbstractFeuille m_feuille;
+    private JPanel m_feuille;
     private JTextField inputValue;
     private Timer timer;/**
      * 
@@ -126,14 +126,17 @@ public class MainFrame extends JFrame
         m_courante = t;
     }
 
-    public AbstractFeuille getFeuille() 
+    public JPanel getFeuille() 
     {
         return m_feuille;
     }
 
-    public void setFeuille(AbstractFeuille feuille) 
+    public void setFeuille(JPanel feuille) 
     {
         m_feuille = feuille;
+        getContentPane().add(m_feuille, "Center");
+        pack();
+        setVisible(true);
     }
     
    /* public void majDesListes(){
@@ -200,6 +203,7 @@ public class MainFrame extends JFrame
         JMenu menuFile = new JMenu("File"); // on installe le premier menu
         menubar.add(menuFile);
 
+        addMenuItem(menuFile, "Nouveau", "Nouveau", KeyEvent.VK_N, base);
         addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N, base);
         addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q, base);
 
@@ -247,13 +251,6 @@ public class MainFrame extends JFrame
 
 
         getContentPane().add(p2, "South");
-
-        m_feuille = new FeuilleDessin(); //500, 400);
-        m_feuille.setBackground(Color.white);
-        m_feuille.setSize(new Dimension(600, 400));
-        m_feuille.setPreferredSize(new Dimension(600, 400));
-
-        getContentPane().add(m_feuille, "Center");
 
         pack();
         setVisible(true);

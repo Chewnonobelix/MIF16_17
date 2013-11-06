@@ -10,17 +10,18 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.util.Iterator;
+import javax.swing.JPanel;
 import tortue.Controleur.Dessin.ControleurDessin;
 import tortue.Model.Dessin.AbstractTortue;
 import tortue.Model.Dessin.Segment;
 import tortue.Model.Dessin.Tortue;
-import tortue.Vue.AbstractFeuille;
+
 
 /**
  *
  * @author Arnaud
  */
-public class FeuilleDessin extends AbstractFeuille 
+public class FeuilleDessin extends JPanel 
 {
 
     /**
@@ -31,6 +32,9 @@ public class FeuilleDessin extends AbstractFeuille
     public FeuilleDessin() 
     {
         initComponents();
+        setBackground(Color.white);
+        setSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 400));
     }
 
     public Dimension getdim() 

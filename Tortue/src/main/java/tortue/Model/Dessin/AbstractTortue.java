@@ -93,8 +93,6 @@ public abstract class AbstractTortue
 
         public void croisement()
         {
-            System.out.println("Croisement base " + getNom());
-            System.out.println(m_listeTortueAmie.size());
             for(Iterator athena = m_listeTortueAmie.iterator(); athena.hasNext();)
             {
                 AbstractTortue hades = (AbstractTortue)(athena.next());

@@ -19,28 +19,27 @@ public class ControlerMain
 {
     static private AbstractControleur m_controleur;
     static private MainFrame m_mainWindow;
-
+    static public ListenerProcedureAvance avance = new ListenerProcedureAvance();
+    static public ListenerProcedureBase base = new ListenerProcedureBase();
+    static public ListenerCombo combo = new ListenerCombo();
+    
     public ControlerMain() 
     {
         ListenerProcedureAvance avance = new ListenerProcedureAvance();
         ListenerProcedureBase base = new ListenerProcedureBase();
         ListenerCombo combo = new ListenerCombo();
         
-        m_controleur = new ControleurJeu();
         m_mainWindow = new MainFrame(base, avance, combo);
-        System.out.println(m_mainWindow);
-        System.out.println(m_mainWindow.getFeuille());
-        base.setControleur((ControleurDessin)m_controleur);
-        base.setFrame(m_mainWindow);
-        avance.setControleur((ControleurDessin)m_controleur);
-        avance.setFrame(m_mainWindow);
         m_mainWindow.setVisible(true);
-        m_controleur.exec();
     } 
 
     public static MainFrame getMainWindow() 
     {
         return m_mainWindow;
     }
-    
+
+    public static void setControleur(AbstractControleur controleur) 
+    {
+        ControlerMain.m_controleur = controleur;
+    }
 }

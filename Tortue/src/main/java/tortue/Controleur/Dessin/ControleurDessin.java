@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import tortue.Controleur.AbstractControleur;
 import tortue.Controleur.ControlerMain;
 import tortue.Model.Dessin.*;
+import tortue.Vue.Dessin.FeuilleDessin;
 import tortue.Vue.MainFrame;
 
 /**
@@ -31,6 +32,8 @@ public class ControleurDessin extends AbstractControleur
         m_factory = new TortueFactory();
         addTortue(m_factory.create());
         setTortueCourante(getTabTortue().get(0));
+        ControlerMain.getMainWindow().setFeuille(new FeuilleDessin());
+        
     }
 
     @Override
@@ -45,7 +48,7 @@ public class ControleurDessin extends AbstractControleur
         m_tabTortue.clear();
         m_tortueCourante = m_factory.create();
         m_tabTortue.add(m_tortueCourante);
-        MainFrame.getFeuille().repaint();
+        //MainFrame.getFeuille().repaint();
     }
 
     public static ArrayList<Tortue> getTabTortue()
