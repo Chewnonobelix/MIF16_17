@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Chewnonobelix
  */
-public abstract class JeuDeBalle 
+public abstract class JeuDeBalle extends Observable
 {
     static private ArrayList<TortueEquipe> m_listeJoueur = new ArrayList<TortueEquipe>();
 

@@ -44,7 +44,7 @@ public class MainFrame extends JFrame
     Tortue m_courante;
     public static final Dimension VGAP = new Dimension(1, 5);
     public static final Dimension HGAP = new Dimension(5, 1);
-    static private FeuilleDessin m_feuille;
+    private AbstractFeuille m_feuille;
     private JTextField inputValue;
     private Timer timer;/**
      * 
@@ -126,12 +126,13 @@ public class MainFrame extends JFrame
         m_courante = t;
     }
 
-    static public FeuilleDessin getFeuille() 
+    public AbstractFeuille getFeuille() 
     {
         return m_feuille;
     }
 
-    static public void setFeuille(FeuilleDessin feuille) {
+    public void setFeuille(AbstractFeuille feuille) 
+    {
         m_feuille = feuille;
     }
     
