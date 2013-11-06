@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public abstract class AbstractTortue
 {
-    protected class Amelioration 
+    public class Amelioration 
     {
         private AbstractTortue m_proprietaire;
         private String nom = new String();
@@ -24,6 +24,7 @@ public abstract class AbstractTortue
 
         public Amelioration() {
                 super();
+                nom = "Donatello";
         }
 
         public Amelioration(String nom) {
@@ -63,8 +64,8 @@ public abstract class AbstractTortue
             this.m_proprietaire = proprietaire;
         }
 
-
         public void afficherNom(){
+
 
             System.out.println(nom);
         }
@@ -89,23 +90,16 @@ public abstract class AbstractTortue
             m_listeTortueAmie.remove(i);
         }
 
-        public int distanceEuclidienne(AbstractTortue raphaello)
-        {
-            int hermes = (getProprietaire().getPosition().x - raphaello.getPosition().x)
-                    *(getProprietaire().getPosition().x - raphaello.getPosition().x) 
-                    + (getProprietaire().getPosition().y - raphaello.getPosition().y)
-                    *(getProprietaire().getPosition().y - raphaello.getPosition().y);
-
-            return (int)(java.lang.Math.sqrt(hermes));
-        }
 
         public void croisement()
         {
+            System.out.println("Croisement base " + getNom());
+            System.out.println(m_listeTortueAmie.size());
             for(Iterator athena = m_listeTortueAmie.iterator(); athena.hasNext();)
             {
                 AbstractTortue hades = (AbstractTortue)(athena.next());
 
-                if(distanceEuclidienne(hades) <= 15)
+                if(getPosition().distance(hades.getPosition()) <= 15)
                 {
                     System.out.println("Bonjour " + hades.getAmelioration().getNom() + "!!!!");
                     System.out.println("Pourrais tu bouger s il te plait ?");
@@ -118,8 +112,9 @@ public abstract class AbstractTortue
         public void deplacement(int n){
             try {
                     Random rand = new Random();
-                    //getProprietaire().setAngle(rand.nextInt(90)-45);
-                    //getProprietaire().deplacement(n);
+                    getProprietaire().setAngle(rand.nextInt(90)-45);
+                    getProprietaire().avancer(n);
+                    
 
                     /*if(this.x + n <= 15 || this.x + n >= SimpleLogo.feuille.getWidth()-0 || 
                             this.y + n >= SimpleLogo.feuille.getHeight()-0 || this.y + n <= 15){
@@ -237,10 +232,34 @@ public abstract class AbstractTortue
         seg.setColor(getCouleur());
         addSegment(seg);
         setPosition(end);
+        
+        getAmelioration().croisement();
+        
+    }
+    
+    public void avancer(int dist) 
+    {
+        int x = getPosition().x;
+        int y = getPosition().y;
+                
+        int newX = (int) Math.round(x+dist*Math.cos(ratioDegRad*getAngle()));
+        int newY = (int) Math.round(y+dist*Math.sin(ratioDegRad*getAngle()));
+
+        
+        if (isLeve() == false) 
+        {
+            deplacement(new Point(newX, newY));
+        }
+        else
+        {
+            setPosition(new Point(newX, newY));
+        }
     }
     
     public void reset()
     {
+        m_amelioration = new Amelioration();
+        m_amelioration.setProprietaire(this);
         getTrace().clear();
         getPosition().x = 250;
         getPosition().y = 200;

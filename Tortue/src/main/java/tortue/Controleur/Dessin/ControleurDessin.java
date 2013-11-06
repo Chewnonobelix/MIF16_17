@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JPanel;
 import tortue.Controleur.AbstractControleur;
 import tortue.Controleur.ControlerMain;
@@ -76,6 +77,15 @@ public class ControleurDessin extends AbstractControleur
         Tortue t = m_factory.create();
         m_tabTortue.add(t);
         m_tortueCourante = t;
+        for(Iterator it = m_tabTortue.iterator(); it.hasNext();)
+        {
+            AbstractTortue tp = (AbstractTortue)it.next();
+            
+            if(tp != t)
+            {
+                tp.getAmelioration().addTortueAmie(t);
+            }
+        }
     }
     
    public void nextTortue()
