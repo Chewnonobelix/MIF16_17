@@ -188,6 +188,11 @@ public abstract class AbstractTortue
         m_couleur = decodeColor(m_indexCouleur);
     }
 
+    public void setCouleur(Color c)
+    {
+        m_couleur = c;
+    }
+    
     public void setTaille(int taille)
     {
         m_taille = taille;

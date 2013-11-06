@@ -9,6 +9,7 @@ import tortue.Controleur.Dessin.ControleurDessin;
 import tortue.Controleur.Dessin.ListenerCombo;
 import tortue.Controleur.Dessin.ListenerProcedureAvance;
 import tortue.Controleur.Dessin.ListenerProcedureBase;
+import tortue.Controleur.Jeu.ControleurJeu;
 import tortue.Vue.MainFrame;
 /**
  *
@@ -25,7 +26,7 @@ public class ControlerMain
         ListenerProcedureBase base = new ListenerProcedureBase();
         ListenerCombo combo = new ListenerCombo();
         
-        m_controleur = new ControleurDessin();
+        m_controleur = new ControleurJeu();
         m_mainWindow = new MainFrame(base, avance, combo);
         System.out.println(m_mainWindow);
         System.out.println(m_mainWindow.getFeuille());
@@ -34,6 +35,7 @@ public class ControlerMain
         avance.setControleur((ControleurDessin)m_controleur);
         avance.setFrame(m_mainWindow);
         m_mainWindow.setVisible(true);
+        m_controleur.exec();
     } 
 
     public static MainFrame getMainWindow() 

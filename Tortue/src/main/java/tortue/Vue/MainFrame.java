@@ -4,6 +4,7 @@
  */
 package tortue.Vue;
 
+import tortue.Vue.Dessin.FeuilleDessin;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

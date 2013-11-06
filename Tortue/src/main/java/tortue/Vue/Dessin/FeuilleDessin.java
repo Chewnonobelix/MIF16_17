@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tortue.Vue;
+package tortue.Vue.Dessin;
 
 import java.awt.Color;
 import java.awt.Dimension;
