@@ -53,7 +53,6 @@ public class MainFrame extends JFrame
     public MainFrame() {
         super("un logo tout simple");
         initComponents();
-        //logoInit();   
     }
 
     public MainFrame(ActionListener base, ActionListener avance, ActionListener combo)
@@ -138,26 +137,6 @@ public class MainFrame extends JFrame
         pack();
         setVisible(true);
     }
-    
-   /* public void majDesListes(){
-	
-        for(int i = 0 ; i < feuille.getTortues().size(); i++){
-            
-            ArrayList<Tortue> listeTortuesAmie = new ArrayList(feuille.getTortues());
-            ((TortueAmelioree)feuille.getTortue(i)).setM_listeTortueAmie(listeTortuesAmie);
-            ((TortueAmelioree)feuille.getTortue(i)).removeTortueAmieI(i);
-        }            
-    }
-    
-     public void majDesListesBalle(){
-	
-        for(int i = 0 ; i < feuille.getTortues().size(); i++){
-            
-            ArrayList<Tortue> listeTortuesAmie = new ArrayList(feuille.getTortues());
-            ((TortueBalle)feuille.getTortue(i)).setM_listeTortueAmie(listeTortuesAmie);
-            ((TortueBalle)feuille.getTortue(i)).removeTortueAmieI(i);
-        }            
-    }*/
 
     
     public void logoInit(ActionListener base, ActionListener avance, ActionListener combo)
@@ -256,31 +235,7 @@ public class MainFrame extends JFrame
         setVisible(true);
     }
 
-   
-   public void creerTortueBouton() {
 
-        /*courante = new TortueAmelioree("");
-
-        feuille.addTortue(courante);
-
-        courante.setPosition(500 / 2, 400 / 2);
-
-        FenetreNom fenetre = new FenetreNom(courante);
-
-        fenetre.setVisible(true);*/
-
-    }
-   
-   public void changerTortueBouton(){
-       
-       
-       /*int position = feuille.getTortues().indexOf(courante);
-       
-       
-       if(position == feuille.getTortues().size() - 1)
-           courante = feuille.getTortues().get(0);
-       else courante = feuille.getTortues().get(position + 1);*/
-    }
 
     public String getInputValue() {
         String s = inputValue.getText();

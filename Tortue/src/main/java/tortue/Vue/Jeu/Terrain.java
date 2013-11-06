@@ -11,12 +11,16 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.Iterator;
 import javax.swing.JPanel;
+import javax.swing.text.Position;
 import tortue.Controleur.Jeu.ControleurJeu;
 import tortue.Model.Dessin.AbstractTortue;
 import tortue.Model.Dessin.Segment;
 import tortue.Model.Dessin.Tortue;
+import tortue.Model.Jeu.Balle;
 import tortue.Model.Jeu.JeuDeBalle;
+import tortue.Model.Jeu.JeuEquipe;
 import tortue.Model.Jeu.Observer;
+import tortue.Model.Jeu.Panier;
 
 
 /**
@@ -47,6 +51,25 @@ public class Terrain extends JPanel implements Observer
         g.fillRect(0,0,m_dim.width, m_dim.height);
         g.setColor(c);
 
+        
+        
+        Point p;
+        
+        if(Balle.getBalle().getPos() == null)
+        {
+            p = Balle.getBalle().getPossesseur().getPosition();
+        }
+        else
+        {
+            p = Balle.getBalle().getPos();
+        }
+        g.setColor(Color.black);
+        g.fillOval(p.x + 5, p.y + 5, 10, 10);
+        
+        
+        
+        g.drawRect(JeuEquipe.panier.getPosition().x, JeuEquipe.panier.getPosition().y, Panier.taille, Panier.taille);
+        
         showTurtles(g);
     }
     

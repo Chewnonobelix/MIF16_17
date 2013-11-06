@@ -22,7 +22,7 @@ public class TortueEquipe extends AbstractTortue
     
     public TortueEquipe(EquipeTortue e) 
     {
-        setLeve(false);
+        setLeve(true);
         m_equipe = e;
         setCouleur(e.getCouleur());
         Point pos = new Point();
@@ -63,7 +63,16 @@ public class TortueEquipe extends AbstractTortue
     
     public void croise(TortueEquipe t)
     {
-        if(t.hasBalle() && !getEquipe().getMembreEquipe().contains(t))
+        if(Balle.getBalle().getPossesseur() == null)
+        {
+            if(getPosition().distance(Balle.getBalle().getPos()) <= 15)
+            {
+                m_balle = Balle.getBalle();
+                m_balle.setPossesseur(this);
+            }
+        }
+        
+        if(t.hasBalle() && getEquipe().getMembreEquipe().contains(t))
         {
             prendBalle(t);
         }
@@ -72,11 +81,26 @@ public class TortueEquipe extends AbstractTortue
     public void prendBalle(TortueEquipe adversaire)
     {
         setBalle(Balle.getBalle());
+        getBalle().setPossesseur(this);
         adversaire.setBalle(null);
     }
-            
+         
+    public void but()
+    {
+        Point posPanier = JeuEquipe.panier.getPosition();
+
+        if(hasBalle() && getPosition().x >= posPanier.x &&
+                getPosition().x < posPanier.x + Panier.taille &&
+                getPosition().y >= posPanier.y &&
+                getPosition().y < posPanier.y + Panier.taille )
+        {
+            getEquipe().scorePP();
+        }
+    }
     public void deplacement()
     {
+        but();
+        
         for(Iterator it = JeuDeBalle.getListeJoueur().iterator(); it.hasNext();)
         {
             TortueEquipe t = (TortueEquipe)it.next();
@@ -93,14 +117,7 @@ public class TortueEquipe extends AbstractTortue
 		setAngle(rand.nextInt(360));
 		this.avancer(TortueEquipe.deplacement);
 			
-		/*if(getPosition().x + TortueEquipe.deplacement <= 15 ||
-                        getPosition().x + TortueEquipe.deplacement >= SimpleLogo.feuille.getWidth()-0 || 
-                        getPosition().y + TortueEquipe.deplacement >= SimpleLogo.feuille.getHeight()-0 || 
-                        getPosition().y + TortueEquipe.deplacement <= 15)
-                {
-			this.droite(180);
-			this.avancer(15);
-                }*/		
+				
 	} 
         catch (NumberFormatException ex)
         {

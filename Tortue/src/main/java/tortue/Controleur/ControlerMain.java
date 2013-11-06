@@ -24,12 +24,10 @@ public class ControlerMain
     static public ListenerCombo combo = new ListenerCombo();
     
     public ControlerMain() 
-    {
-        ListenerProcedureAvance avance = new ListenerProcedureAvance();
-        ListenerProcedureBase base = new ListenerProcedureBase();
-        ListenerCombo combo = new ListenerCombo();
-        
+    {       
         m_mainWindow = new MainFrame(base, avance, combo);
+        avance.setFrame(m_mainWindow);
+        base.setFrame(m_mainWindow);
         m_mainWindow.setVisible(true);
     } 
 
@@ -41,5 +39,27 @@ public class ControlerMain
     public static void setControleur(AbstractControleur controleur) 
     {
         ControlerMain.m_controleur = controleur;
+    }
+    
+    static public void nouveau(String c)
+    {
+                ControlerMain.base.setControleur(null);
+                ControlerMain.avance.setControleur(null);
+                ControlerMain.combo.setDessin(null);
+                
+                if(c.matches("Dessin"))
+                {
+                    ControleurDessin a = new ControleurDessin();
+                    ControlerMain.setControleur(a);
+                    ControlerMain.base.setControleur(a);
+                    ControlerMain.avance.setControleur(a);
+                    ControlerMain.combo.setDessin(a);
+                }
+                else if(c.matches("Jeu"))
+                {
+                    ControleurJeu a = new ControleurJeu();
+                    ControlerMain.setControleur(a);
+                    a.exec();
+                }
     }
 }

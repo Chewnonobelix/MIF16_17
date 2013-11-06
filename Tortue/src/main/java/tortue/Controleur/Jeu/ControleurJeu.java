@@ -10,6 +10,7 @@ import tortue.Controleur.ControlerMain;
 import tortue.Model.Jeu.EquipeTortue;
 import tortue.Model.Jeu.JeuDeBalle;
 import tortue.Model.Jeu.JeuEquipe;
+import tortue.Vue.Jeu.Score;
 import tortue.Vue.Jeu.Terrain;
 import tortue.Vue.MainFrame;
 
@@ -21,9 +22,11 @@ public class ControleurJeu extends AbstractControleur
 {
     static private JeuDeBalle m_jeu = null;
     private Terrain m_terrain;
-
+    private Score m_score;
+    
     public ControleurJeu() 
     {
+        m_score = new Score();
         m_terrain = new Terrain();
         m_jeu = new JeuEquipe();
         m_jeu.addObserver(m_terrain);
@@ -33,15 +36,14 @@ public class ControleurJeu extends AbstractControleur
         EquipeTortue e = new EquipeTortue();
         e.setCouleur(Color.blue);
         ((JeuEquipe)m_jeu).addEquipe(e);
+        e.addObserver(m_score);
         e = new EquipeTortue();
         e.setCouleur(Color.red);
         ((JeuEquipe)m_jeu).addEquipe(e);
-        e = new EquipeTortue();
-        e.setCouleur(Color.green);
-        ((JeuEquipe)m_jeu).addEquipe(e);
-        e = new EquipeTortue();
-        e.setCouleur(Color.orange);
-        ((JeuEquipe)m_jeu).addEquipe(e);
+        e.addObserver(m_score);
+        
+       m_score.setVisible(true);
+        
     }
 
     public static JeuDeBalle getJeu() 
@@ -50,10 +52,12 @@ public class ControleurJeu extends AbstractControleur
     }
 
     
+
+    
+    
     @Override
     public void exec()
     {
-        System.out.println("Exec Controler");
         if(m_jeu != null)
         {
             m_jeu.exec();

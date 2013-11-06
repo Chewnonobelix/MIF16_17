@@ -26,6 +26,7 @@ public class ControleurDessin extends AbstractControleur
     static private Tortue m_tortueCourante;
     static private TortueFactory m_factory;
     
+    
     public ControleurDessin() 
     {
         m_tabTortue = new ArrayList<Tortue>();
@@ -48,7 +49,7 @@ public class ControleurDessin extends AbstractControleur
         m_tabTortue.clear();
         m_tortueCourante = m_factory.create();
         m_tabTortue.add(m_tortueCourante);
-        //MainFrame.getFeuille().repaint();
+        ControlerMain.getMainWindow().getFeuille().repaint();
     }
 
     public static ArrayList<Tortue> getTabTortue()

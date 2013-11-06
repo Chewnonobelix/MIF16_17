@@ -12,13 +12,14 @@ import java.util.Iterator;
  *
  * @author Chewnonobelix
  */
-public class EquipeTortue 
+public class EquipeTortue extends Observable
 {
-    public static final int tailleEquipe = 2;
+    public static final int tailleEquipe = 10;
     private String m_nomEquipe;
     private Color m_couleur = Color.BLACK;
     private ArrayList<TortueEquipe> m_membreEquipe = new ArrayList<>();
-
+    private int m_score = 0;
+    
     public EquipeTortue() 
     {
         for(int i = 1; i <= tailleEquipe; i++)
@@ -82,4 +83,18 @@ public class EquipeTortue
     {
         getMembreEquipe().remove(t);
     }
+    
+    public void scorePP()
+    {
+        m_score++;
+        
+        notifier();
+    }
+
+    public int getScore()
+    {
+        return m_score;
+    }
+    
+    
 }

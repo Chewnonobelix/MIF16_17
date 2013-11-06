@@ -39,32 +39,8 @@ public class ListenerProcedureBase implements ActionListener
         // actions des boutons du haut
         if(c.matches("Nouveau"))
         {
-            System.out.println("Nouveau");
             Nouveau n = new Nouveau();
             n.setVisible(true);
-            
-    
-            
-            if(n.isOk() == 1)
-            {
-                m_dessin = null;
-                ControlerMain.avance.setControleur(null);
-                ControlerMain.combo.setDessin(null);
-                
-                if(n.getValue().matches("Dessin"))
-                {
-                    ControleurDessin a = new ControleurDessin();
-                    ControlerMain.setControleur(a);
-                    ControlerMain.avance.setControleur(a);
-                    ControlerMain.combo.setDessin(a);
-                }
-                else if(n.getValue().matches("Jeu"))
-                {
-                    ControleurJeu a = new ControleurJeu();
-                    ControlerMain.setControleur(a);
-                    a.exec();
-                }
-            }
         }
         
         if(m_dessin != null)

@@ -4,6 +4,8 @@
  */
 package tortue.Vue;
 
+import tortue.Controleur.ControlerMain;
+
 /**
  *
  * @author Chewnonobelix
@@ -145,6 +147,9 @@ public class Nouveau extends javax.swing.JFrame {
         }
         
         m_ok = 1;
+        
+        ControlerMain.nouveau(m_value);
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

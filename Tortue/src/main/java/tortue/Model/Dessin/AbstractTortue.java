@@ -114,12 +114,6 @@ public abstract class AbstractTortue
                     getProprietaire().avancer(n);
                     
 
-                    /*if(this.x + n <= 15 || this.x + n >= SimpleLogo.feuille.getWidth()-0 || 
-                            this.y + n >= SimpleLogo.feuille.getHeight()-0 || this.y + n <= 15){
-                            this.droite(180);
-                            this.avancer(15);
-            }*/
-
             } catch (NumberFormatException ex){
                     System.err.println("ce n'est pas un nombre : " + n);
             }

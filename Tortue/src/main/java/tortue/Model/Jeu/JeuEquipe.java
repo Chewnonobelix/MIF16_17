@@ -17,12 +17,22 @@ public class JeuEquipe extends JeuDeBalle
 {
 
     private ArrayList<EquipeTortue> m_listeEquipe = new ArrayList<>();
+    private boolean m_enCours = true;
+    private Timer time = new Timer();
+    static public Panier panier = new Panier();
+    
+    public void setEnCours(boolean enCours) {
+        this.m_enCours = enCours;
+        
+        if(!m_enCours)
+        {
+            time.cancel();
+        }
+    }
     
     @Override
     public void exec() 
     {
-        Timer time = new Timer();
-        
         time.schedule (new TimerTask() {
             public void run()
             {
